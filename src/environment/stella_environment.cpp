@@ -283,7 +283,6 @@ void StellaEnvironment::processScreen() {
 
 void StellaEnvironment::processRAM() {
   // Copy RAM over
-  #pragma omp parallel for
   for (int i = 0; i < m_ram.size(); i++)
     *m_ram.byte(i) = m_osystem->console().system().peek(i + 0x80); 
 }
