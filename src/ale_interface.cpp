@@ -340,9 +340,9 @@ const ALEScreen& ALEInterface::getScreen() {
 //the grayscale colours
 void ALEInterface::getScreenGrayscale(
     std::vector<unsigned char>& grayscale_output_buffer) {
-  size_t w = environment->getScreen().width();
-  size_t h = environment->getScreen().height();
-  size_t screen_size = w * h;
+  int w = environment->getScreen().width();
+  int h = environment->getScreen().height();
+  int screen_size = w * h;
 
   pixel_t *ale_screen_data = environment->getScreen().getArray();
   theOSystem->colourPalette().applyPaletteGrayscale(grayscale_output_buffer,
@@ -353,9 +353,9 @@ void ALEInterface::getScreenGrayscale(
 //the RGB colours. The first positions contain the red colours,
 //followed by the green colours and then the blue colours
 void ALEInterface::getScreenRGB(std::vector<unsigned char>& output_rgb_buffer) {
-  size_t w = environment->getScreen().width();
-  size_t h = environment->getScreen().height();
-  size_t screen_size = w * h;
+  int w = environment->getScreen().width();
+  int h = environment->getScreen().height();
+  int screen_size = w * h;
 
   pixel_t *ale_screen_data = environment->getScreen().getArray();
 

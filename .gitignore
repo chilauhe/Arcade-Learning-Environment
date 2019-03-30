@@ -3,6 +3,11 @@
 ale
 build
 doc/examples/*Example
+doc/examples/Debug
+doc/examples/Release
+
+Debug
+Release
 
 ## Generic
 
@@ -22,8 +27,11 @@ doc/examples/*Example
 
 # Compiled Dynamic libraries
 *.so
+*.dll
+*.exe
 
 # Compiled Static libraries
 *.lai
 *.la
 *.a
+*.lib

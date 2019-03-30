@@ -93,5 +93,12 @@ typedef int reward_t;
 // Other constant values
 #define RAM_LENGTH 128
 
+#ifndef min
+template<typename x> x min(x a, x b) { return a < b ? a : b; }
+#endif
+#ifndef max
+template<typename x> x max(x a, x b) { return a > b ? a : b; }
+#endif
+
 #endif // __CONSTANTS_H__
 

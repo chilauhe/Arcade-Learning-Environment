@@ -148,9 +148,9 @@ class Cartridge : public Device
 
       @return  True if the signature was found at least 'minhits' time, else false
     */
-    static bool searchForBytes(const uInt8* image, uInt32 imagesize,
-                               const uInt8* signature, uInt32 sigsize,
-                               uInt32 minhits);
+    static bool searchForBytes(const uInt8* image, int imagesize,
+                               const uInt8* signature, int sigsize,
+                               int minhits);
 
     /**
       Returns true if the image is probably a SuperChip (256 bytes RAM)

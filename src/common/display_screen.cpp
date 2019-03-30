@@ -24,7 +24,7 @@ DisplayScreen::DisplayScreen(MediaSource* mediaSource,
         media_source(mediaSource),
         my_sound(sound),
         colour_palette(palette),
-        delay_msec(17)
+        delay_msec(0)
 {
     screen_height = media_source->height();
     screen_width = media_source->width();
@@ -63,9 +63,11 @@ void DisplayScreen::display_screen() {
     int xciel = int(xratio) + 1;
     int yciel = int(yratio) + 1;
     uInt8* pi_curr_frame_buffer = media_source->currentFrameBuffer();
-    int y, x, r, g, b;
-    SDL_Rect rect;
-    for (int i = 0; i < screen_width * screen_height; i++) {
+	int screen_size = screen_width * screen_height;
+	#pragma omp parallel for
+    for (int i = 0; i < screen_size; i++) {
+		int y, x, r, g, b;
+		SDL_Rect rect;
         y = i / screen_width;
         x = i - (y * screen_width);
         colour_palette.getRGB(pi_curr_frame_buffer[i], r, g, b);
@@ -81,16 +83,20 @@ void DisplayScreen::display_screen() {
     SDL_UpdateRect(screen, 0, 0, 0, 0);
     poll();
 
-    // Wait a while, calibrating so that the delay remains the same
-    Uint32 newTime = SDL_GetTicks();
-    Uint32 delta = newTime - min(last_frame_time, newTime);
+	if (delay_msec)
+	{
+		// Wait a while, calibrating so that the delay remains the same
+		Uint32 newTime = SDL_GetTicks();
+		Uint32 delta = newTime - min(last_frame_time, newTime);
 
-    if (delta < delay_msec) {
-        SDL_Delay(delay_msec - delta);
-    } else {
-        // Try to keep up with the delay
-        last_frame_time = SDL_GetTicks() + delta - delay_msec;
-    }
+		if (delta < delay_msec) {
+			SDL_Delay(delay_msec - delta);
+		}
+		else {
+			// Try to keep up with the delay
+			last_frame_time = SDL_GetTicks() + delta - delay_msec;
+		}
+	}
 }
 
 void DisplayScreen::poll() {

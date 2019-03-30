@@ -62,7 +62,7 @@ int main(int argc, char** argv) {
     ale.loadROM(argv[1]);
 
     // Get the vector of legal actions
-    ActionVect legal_actions = ale.getLegalActionSet();
+    ActionVect legal_actions = ale.getMinimalActionSet();
 
     // Play a single episode, which we record. 
     while (!ale.game_over()) {

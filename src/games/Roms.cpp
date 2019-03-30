@@ -89,7 +89,7 @@
 #include "supported/WizardOfWor.hpp"
 #include "supported/YarsRevenge.hpp"
 #include "supported/Zaxxon.hpp"
-
+#include <algorithm>
 
 /* list of supported games */
 static const RomSettings *roms[]  = {
@@ -180,11 +180,12 @@ RomSettings *buildRomRLWrapper(const std::string &rom) {
     size_t dot_idx = rom_str.find_first_of(".");
     rom_str = rom_str.substr(0, dot_idx);
     std::transform(rom_str.begin(), rom_str.end(), rom_str.begin(), ::tolower);
-
-    for (size_t i=0; i < sizeof(roms)/sizeof(roms[0]); i++) {
-        if (rom_str == roms[i]->rom()) return roms[i]->clone();
+	RomSettings *setting = nullptr;
+    #pragma omp parallel for
+    for (int i=0; i < sizeof(roms)/sizeof(roms[0]); i++) {
+        if (setting == nullptr && rom_str == roms[i]->rom()) setting = roms[i]->clone();
     }
 
-    return NULL;
+    return setting;
 }
 

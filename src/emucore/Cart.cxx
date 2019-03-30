@@ -284,15 +284,16 @@ string Cartridge::autodetectType(const uInt8* image, uInt32 size)
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-bool Cartridge::searchForBytes(const uInt8* image, uInt32 imagesize,
-                               const uInt8* signature, uInt32 sigsize,
-                               uInt32 minhits)
+bool Cartridge::searchForBytes(const uInt8* image, int imagesize,
+                               const uInt8* signature, int sigsize,
+                               int minhits)
 {
-  uInt32 count = 0;
-  for(uInt32 i = 0; i < imagesize - sigsize; ++i)
+  int count = 0;
+  int imax = imagesize - sigsize;
+  for(int i = 0; i < imax; ++i)
   {
-    uInt32 matches = 0;
-    for(uInt32 j = 0; j < sigsize; ++j)
+    int matches = 0;
+    for(int j = 0; j < sigsize; ++j)
     {
       if(image[i+j] == signature[j])
         ++matches;
@@ -317,11 +318,11 @@ bool Cartridge::isProbablySC(const uInt8* image, uInt32 size)
   // We assume a Superchip cart contains the same bytes for its entire
   // RAM area; obviously this test will fail if it doesn't
   // The RAM area will be the first 256 bytes of each 4K bank
-  uInt32 banks = size / 4096;
-  for(uInt32 i = 0; i < banks; ++i)
+  int banks = size / 4096;
+  for(int i = 0; i < banks; ++i)
   {
     uInt8 first = image[i*4096];
-    for(uInt32 j = 0; j < 256; ++j)
+    for(int j = 0; j < 256; ++j)
     {
       if(image[i*4096+j] != first)
         return false;
@@ -368,7 +369,7 @@ bool Cartridge::isProbablyE0(const uInt8* image, uInt32 size)
    { 0xAD, 0xED, 0xFF },  // LDA $FFED
    { 0xAD, 0xF3, 0xBF }   // LDA $BFF3
   };
-  for(uInt32 i = 0; i < 6; ++i)
+  for(int i = 0; i < 6; ++i)
   {
     if(searchForBytes(image, size, signature[i], 3, 1))
       return true;
@@ -389,7 +390,7 @@ bool Cartridge::isProbablyE7(const uInt8* image, uInt32 size)
   // of the same amount of (probably unused) data by making sure that
   // something differs in the previous 32 or next 32 bytes
   uInt8 first = image[0x3800];
-  for(uInt32 i = 0x3800; i < 0x3A00; ++i)
+  for(int i = 0x3800; i < 0x3A00; ++i)
   {
     if(first != image[i])
       return false;
@@ -397,17 +398,19 @@ bool Cartridge::isProbablyE7(const uInt8* image, uInt32 size)
 
   // OK, now scan the surrounding 32 byte blocks
   uInt32 count1 = 0, count2 = 0;
-  for(uInt32 i = 0x3800 - 32; i < 0x3800; ++i)
+  #pragma omp parallel
   {
-    if(first != image[i])
-      ++count1;
+	  for (int i = 0x3800 - 32; i < 0x3800; ++i)
+	  {
+		  if (first != image[i])
+			  ++count1;
+	  }
+	  for (int i = 0x3A00; i < 0x3A00 + 32; ++i)
+	  {
+		  if (first != image[i])
+			  ++count2;
+	  }
   }
-  for(uInt32 i = 0x3A00; i < 0x3A00 + 32; ++i)
-  {
-    if(first != image[i])
-      ++count2;
-  }
-
   return (count1 > 0 || count2 > 0);
 }
 
@@ -447,7 +450,7 @@ bool Cartridge::isProbablyFE(const uInt8* image, uInt32 size)
     { 0xD0, 0xFB, 0x20, 0x73, 0xFE },  // BNE $FB; JSR $FE73
     { 0x20, 0x00, 0xF0, 0x84, 0xD6 }   // JSR $F000; STY $D6
   };
-  for(uInt32 i = 0; i < 4; ++i)
+  for(int i = 0; i < 4; ++i)
   {
     if(searchForBytes(image, size, signature[i], 5, 1))
       return true;

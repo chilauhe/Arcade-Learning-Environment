@@ -44,8 +44,8 @@ class ALEScreen {
     pixel_t *getArray() const { return const_cast<pixel_t *>(&m_pixels[0]); }
 
     /** Dimensionality information */
-    size_t height() const { return m_rows; }
-    size_t width() const { return m_columns; }
+    int height() const { return m_rows; }
+    int width() const { return m_columns; }
 
     /** Returns the size of the underlying array */
     size_t arraySize() const { return m_rows * m_columns * sizeof(pixel_t); }
