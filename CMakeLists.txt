@@ -166,7 +166,7 @@ if(BUILD_CLI)
 endif()
 
 if(BUILD_C_LIB)
-  add_library(ale-c-lib STATIC ${CMAKE_CURRENT_SOURCE_DIR}/ale_python_interface/ale_c_wrapper.cpp ${SOURCE_DIR}/ale_interface.cpp ${SOURCES})
+  add_library(ale-c-lib SHARED ${CMAKE_CURRENT_SOURCE_DIR}/ale_python_interface/ale_c_wrapper.cpp ${SOURCE_DIR}/ale_interface.cpp ${SOURCES})
   set_target_properties(ale-c-lib PROPERTIES OUTPUT_NAME ale_c)
   set_target_properties(ale-c-lib PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/ale_python_interface)
   if(UNIX)

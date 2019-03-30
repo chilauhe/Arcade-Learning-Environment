@@ -45,6 +45,14 @@
 #include <string>
 #include <memory>
 
+#ifdef WIN32
+#if defined(ale_c_lib_EXPORTS) && !defined(ALE_API)
+	#define ALE_API __declspec(dllexport)
+#else
+	#define ALE_API __declspec(dllimport)
+#endif
+#endif
+
 static const std::string Version = "0.6.0";
 
 /**
@@ -52,49 +60,49 @@ static const std::string Version = "0.6.0";
  */
 class ALEInterface {
 public:
-  ALEInterface();
-  ~ALEInterface();
+  ALE_API ALEInterface();
+  ALE_API ~ALEInterface();
   // Legacy constructor
-  ALEInterface(bool display_screen);
+  ALE_API ALEInterface(bool display_screen);
 
   // Get the value of a setting.
-  std::string getString(const std::string& key);
-  int getInt(const std::string& key);
-  bool getBool(const std::string& key);
-  float getFloat(const std::string& key);
+  ALE_API std::string getString(const std::string& key);
+  ALE_API int getInt(const std::string& key);
+  ALE_API bool getBool(const std::string& key);
+  ALE_API float getFloat(const std::string& key);
 
   // Set the value of a setting. loadRom() must be called before the
   // setting will take effect.
-  void setString(const std::string& key, const std::string& value);
-  void setInt(const std::string& key, const int value);
-  void setBool(const std::string& key, const bool value);
-  void setFloat(const std::string& key, const float value);
+  ALE_API void setString(const std::string& key, const std::string& value);
+  ALE_API void setInt(const std::string& key, const int value);
+  ALE_API void setBool(const std::string& key, const bool value);
+  ALE_API void setFloat(const std::string& key, const float value);
 
   // Resets the Atari and loads a game. After this call the game
   // should be ready to play. This is necessary after changing a
   // setting for the setting to take effect.
-  void loadROM(std::string rom_file);
+  ALE_API void loadROM(std::string rom_file);
 
   // Applies an action to the game and returns the reward. It is the
   // user's responsibility to check if the game has ended and reset
   // when necessary - this method will keep pressing buttons on the
   // game over screen.
-  reward_t act(Action action);
+  ALE_API reward_t act(Action action);
 
   // Indicates if the game has ended.
-  bool game_over() const;
+  ALE_API bool game_over() const;
 
   // Resets the game, but not the full system.
-  void reset_game();
+  ALE_API void reset_game();
 
   // Returns the vector of modes available for the current game.
   // This should be called only after the rom is loaded.
-  ModeVect getAvailableModes();
+  ALE_API ModeVect getAvailableModes();
 
   // Sets the mode of the game.
   // The mode must be an available mode (otherwise it throws an exception).
   // This should be called only after the rom is loaded.
-  void setMode(game_mode_t m);
+  ALE_API void setMode(game_mode_t m);
 
   //Returns the vector of difficulties available for the current game.
   //This should be called only after the rom is loaded. Notice
@@ -107,74 +115,74 @@ public:
   //   2         left B/right A
   //   3         left A/right B
   //   4         left A/right A
-  DifficultyVect getAvailableDifficulties();
+  ALE_API DifficultyVect getAvailableDifficulties();
 
   // Sets the difficulty of the game.
   // The difficulty must be an available mode (otherwise it throws an exception).
   // This should be called only after the rom is loaded.
-  void setDifficulty(difficulty_t m);
+  ALE_API void setDifficulty(difficulty_t m);
 
   // Returns the vector of legal actions. This should be called only
   // after the rom is loaded.
-  ActionVect getLegalActionSet();
+  ALE_API ActionVect getLegalActionSet();
 
   // Returns the vector of the minimal set of actions needed to play
   // the game.
-  ActionVect getMinimalActionSet();
+  ALE_API ActionVect getMinimalActionSet();
 
   // Returns the frame number since the loading of the ROM
-  int getFrameNumber();
+  ALE_API int getFrameNumber();
 
   // The remaining number of lives.
-  int lives();
+  ALE_API int lives();
 
   // Returns the frame number since the start of the current episode
-  int getEpisodeFrameNumber() const;
+  ALE_API int getEpisodeFrameNumber() const;
 
   // Returns the current game screen
   const ALEScreen &getScreen();
 
   //This method should receive an empty vector to fill it with
   //the grayscale colours
-  void getScreenGrayscale(std::vector<unsigned char>& grayscale_output_buffer);
+  ALE_API void getScreenGrayscale(std::vector<unsigned char>& grayscale_output_buffer);
 
   //This method should receive a vector to fill it with
   //the RGB colours. The first positions contain the red colours,
   //followed by the green colours and then the blue colours
-  void getScreenRGB(std::vector<unsigned char>& output_rgb_buffer);
+  ALE_API void getScreenRGB(std::vector<unsigned char>& output_rgb_buffer);
 
   // Returns the current RAM content
-  const ALERAM &getRAM();
+  ALE_API const ALERAM &getRAM();
 
   // Saves the state of the system
-  void saveState();
+  ALE_API void saveState();
 
   // Loads the state of the system
-  void loadState();
+  ALE_API void loadState();
 
   // This makes a copy of the environment state. This copy does *not* include pseudorandomness,
   // making it suitable for planning purposes. By contrast, see cloneSystemState.
-  ALEState cloneState();
+  ALE_API ALEState cloneState();
 
   // Reverse operation of cloneState(). This does not restore pseudorandomness, so that repeated
   // calls to restoreState() in the stochastic controls setting will not lead to the same outcomes.
   // By contrast, see restoreSystemState.
-  void restoreState(const ALEState& state);
+  ALE_API void restoreState(const ALEState& state);
 
   // This makes a copy of the system & environment state, suitable for serialization. This includes
   // pseudorandomness and so is *not* suitable for planning purposes.
-  ALEState cloneSystemState();
+  ALE_API ALEState cloneSystemState();
 
   // Reverse operation of cloneSystemState.
-  void restoreSystemState(const ALEState& state);
+  ALE_API void restoreSystemState(const ALEState& state);
 
   // Save the current screen as a png file
-  void saveScreenPNG(const std::string& filename);
+  ALE_API void saveScreenPNG(const std::string& filename);
 
   // Creates a ScreenExporter object which can be used to save a sequence of frames. Ownership 
   // said object is passed to the caller. Frames are saved in the directory 'path', which needs
   // to exists. 
-  ScreenExporter *createScreenExporter(const std::string &path) const;
+  ALE_API ScreenExporter *createScreenExporter(const std::string &path) const;
 
  public:
   std::unique_ptr<OSystem> theOSystem;
@@ -185,11 +193,11 @@ public:
 
  public:
   // Display ALE welcome message
-  static std::string welcomeMessage();
-  static void disableBufferedIO();
-  static void createOSystem(std::unique_ptr<OSystem> &theOSystem,
+  ALE_API static std::string welcomeMessage();
+  ALE_API static void disableBufferedIO();
+  ALE_API static void createOSystem(std::unique_ptr<OSystem> &theOSystem,
                             std::unique_ptr<Settings> &theSettings);
-  static void loadSettings(const std::string& romfile,
+  ALE_API static void loadSettings(const std::string& romfile,
                            std::unique_ptr<OSystem> &theOSystem);
 
  private:
