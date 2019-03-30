@@ -41,16 +41,16 @@ class ColourPalette {
             For each byte in src_buffer, three bytes are returned in dst_buffer
             8 bits => 24 bits
          */
-        void applyPaletteRGB(uInt8* dst_buffer, uInt8 *src_buffer, size_t src_size);
-        void applyPaletteRGB(std::vector<unsigned char>& dst_buffer, uInt8 *src_buffer, size_t src_size);
+        void applyPaletteRGB(uInt8* dst_buffer, uInt8 *src_buffer, int src_size);
+        void applyPaletteRGB(std::vector<unsigned char>& dst_buffer, uInt8 *src_buffer, int src_size);
 
         /**
             Applies the current grayscale palette to the src_buffer and returns the results in dst_buffer
             For each byte in src_buffer, a single byte is returned in dst_buffer
             8 bits => 8 bits
          */
-        void applyPaletteGrayscale(uInt8* dst_buffer, uInt8 *src_buffer, size_t src_size);
-        void applyPaletteGrayscale(std::vector<unsigned char>& dst_buffer, uInt8 *src_buffer, size_t src_size);
+        void applyPaletteGrayscale(uInt8* dst_buffer, uInt8 *src_buffer, int src_size);
+        void applyPaletteGrayscale(std::vector<unsigned char>& dst_buffer, uInt8 *src_buffer, int src_size);
 
         /**
           Loads all defined palettes with PAL color-loss data depending

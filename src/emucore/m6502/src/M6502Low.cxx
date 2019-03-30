@@ -220,7 +220,7 @@ void M6502Low::interruptHandler()
 bool M6502Low::save(Serializer& out)
 {
   string CPU = name();
-
+  
   try
   {
     out.putString(CPU);
@@ -260,7 +260,6 @@ bool M6502Low::save(Serializer& out)
 bool M6502Low::load(Deserializer& in)
 {
   string CPU = name();
-
   try
   {
     if(in.getString() != CPU)

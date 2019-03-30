@@ -37,7 +37,8 @@ M6502::M6502(uInt32 systemCyclesPerProcessorCycle)
 #endif
 
   // Compute the BCD lookup table
-  uInt16 t;
+  int t;
+  #pragma omp parallel for
   for(t = 0; t < 256; ++t)
   {
     ourBCDTable[0][t] = ((t >> 4) * 10) + (t & 0x0f);
@@ -45,6 +46,7 @@ M6502::M6502(uInt32 systemCyclesPerProcessorCycle)
   }
 
   // Compute the System Cycle table
+  #pragma omp parallel for
   for(t = 0; t < 256; ++t)
   {
     myInstructionSystemCycleTable[t] = ourInstructionProcessorCycleTable[t] *

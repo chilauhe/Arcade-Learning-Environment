@@ -71,53 +71,52 @@ uInt32 ColourPalette::getRGB(int val) const
     return m_palette[val];
 }
 
-void ColourPalette::applyPaletteRGB(uInt8* dst_buffer, uInt8 *src_buffer, size_t src_size)
+void ColourPalette::applyPaletteRGB(uInt8* dst_buffer, uInt8 *src_buffer, int src_size)
 {
     uInt8 *p = src_buffer;
     uInt8 *q = dst_buffer;
-
-    for(size_t i = 0; i < src_size; i++, p++){
-        int rgb = m_palette[*p];
-        *q = (unsigned char) ((rgb >> 16));  q++;    // r
-        *q = (unsigned char) ((rgb >>  8));  q++;    // g
-        *q = (unsigned char) ((rgb >>  0));  q++;    // b
+#pragma omp parallel for
+    for(int i = 0; i < src_size; i++){
+        q[i*3] = (unsigned char) ((m_palette[p[i]] >> 16));   // r
+        q[i*3+1] = (unsigned char) ((m_palette[p[i]] >>  8)); // g
+        q[i*3+2] = (unsigned char) ((m_palette[p[i]] >>  0)); // b
     }
 }
 
-void ColourPalette::applyPaletteRGB(std::vector<unsigned char>& dst_buffer, uInt8 *src_buffer, size_t src_size)
+void ColourPalette::applyPaletteRGB(std::vector<unsigned char>& dst_buffer, uInt8 *src_buffer, int src_size)
 {
-    dst_buffer.resize(3 * src_size);
-    assert(dst_buffer.size() == 3 * src_size);
+    int dst_size=src_size * 3;
+    dst_buffer.resize(dst_size);
+    assert(dst_buffer.size() == dst_size);
 
     uInt8 *p = src_buffer;
-
-    for(size_t i = 0; i < src_size * 3; i += 3, p++){
-        int rgb = m_palette[*p];
-        dst_buffer[i+0] = (unsigned char) ((rgb >> 16));    // r
-        dst_buffer[i+1] = (unsigned char) ((rgb >>  8));    // g
-        dst_buffer[i+2] = (unsigned char) ((rgb >>  0));    // b
+#pragma omp parallel for
+    for(int i = 0; i < dst_size; i += 3){
+        dst_buffer[i+0] = (unsigned char) ((m_palette[p[i/3]] >> 16));    // r
+        dst_buffer[i+1] = (unsigned char) ((m_palette[p[i/3]] >>  8));    // g
+        dst_buffer[i+2] = (unsigned char) ((m_palette[p[i/3]] >>  0));    // b
     }
 }
 
-void ColourPalette::applyPaletteGrayscale(uInt8* dst_buffer, uInt8 *src_buffer, size_t src_size)
+void ColourPalette::applyPaletteGrayscale(uInt8* dst_buffer, uInt8 *src_buffer, int src_size)
 {
     uInt8 *p = src_buffer;
     uInt8 *q = dst_buffer;
-
-    for(size_t i = 0; i < src_size; i++, p++, q++){
-        *q = (unsigned char) (m_palette[*p+1] & 0xFF);
+#pragma omp parallel for
+    for(int i = 0; i < src_size; i++){
+        q[i] = (unsigned char) (m_palette[p[i]+1] & 0xFF);
     }
 }
 
-void ColourPalette::applyPaletteGrayscale(std::vector<unsigned char>& dst_buffer, uInt8 *src_buffer, size_t src_size)
+void ColourPalette::applyPaletteGrayscale(std::vector<unsigned char>& dst_buffer, uInt8 *src_buffer, int src_size)
 {
     dst_buffer.resize(src_size);
     assert(dst_buffer.size() == src_size);
 
     uInt8 *p = src_buffer;
-
-    for(size_t i = 0; i < src_size; i++, p++){
-        dst_buffer[i] = (unsigned char) (m_palette[*p+1] & 0xFF);
+#pragma omp parallel for
+    for(int i = 0; i < src_size; i++){
+        dst_buffer[i] = (unsigned char) (m_palette[p[i]+1] & 0xFF);
     }
 }
 
@@ -179,13 +178,14 @@ void ColourPalette::loadUserPalette(const string& paletteFile)
 
     // Now that we have valid data, create the user-defined palettes
     uInt8 pixbuf[bytesPerColor];  // Temporary buffer for one 24-bit pixel
-
+#pragma omp parallel for
     for(int i = 0; i < NTSCPaletteSize; i++)  // NTSC palette
     {
         paletteStream.read((char*)pixbuf, bytesPerColor);
         m_userNTSCPalette[(i<<1)] = packRGB(pixbuf[0], pixbuf[1], pixbuf[2]);
         m_userNTSCPalette[(i<<1)+1] = convertGrayscale(m_userNTSCPalette[(i<<1)]);
     }
+#pragma omp parallel for
     for(int i = 0; i < PALPaletteSize; i++)  // PAL palette
     {
         paletteStream.read((char*)pixbuf, bytesPerColor);
@@ -194,6 +194,7 @@ void ColourPalette::loadUserPalette(const string& paletteFile)
     }
 
     uInt32 tmpSecam[SECAMPaletteSize*2];         // All 8 24-bit pixels, plus 8 colorloss pixels
+#pragma omp parallel for
     for(int i = 0; i < SECAMPaletteSize; i++)    // SECAM palette
     {
         paletteStream.read((char*)pixbuf, bytesPerColor);
@@ -202,6 +203,7 @@ void ColourPalette::loadUserPalette(const string& paletteFile)
     }
 
     uInt32*tmpSECAMPalettePtr = m_userSECAMPalette;
+#pragma omp parallel for
     for(int i = 0; i < 16; ++i)
     {
         memcpy(tmpSECAMPalettePtr, tmpSecam, SECAMPaletteSize*2);
