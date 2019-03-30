@@ -51,6 +51,8 @@
 #else
 	#define ALE_API __declspec(dllimport)
 #endif
+#else
+#define ALE_API
 #endif
 
 static const std::string Version = "0.6.0";
