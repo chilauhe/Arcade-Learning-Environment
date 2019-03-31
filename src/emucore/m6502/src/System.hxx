@@ -246,8 +246,29 @@ class System
 
       @return The byte at the specified address
     */
-    uInt8 peek(uInt16 address);
+    inline uInt8 peek(uInt16 addr)
+	{
+		PageAccess& access = myPageAccessTable[(addr & myAddressMask) >> myPageShift];
 
+		uInt8 result;
+
+		// See if this page uses direct accessing or not 
+		if (access.directPeekBase != 0)
+		{
+			result = *(access.directPeekBase + (addr & myPageMask));
+		}
+		else
+		{
+			result = access.device->peek(addr);
+		}
+
+#ifdef DEBUGGER_SUPPORT
+		if (!myDataBusLocked)
+#endif
+			myDataBusState = result;
+
+		return result;
+	}
     /**
       Change the byte at the specified address to the given value.
       No masking of the address occurs before it's sent to the device
@@ -256,8 +277,25 @@ class System
       @param address The address where the value should be stored
       @param value The value to be stored at the address
     */
-    void poke(uInt16 address, uInt8 value);
+    inline void poke(uInt16 addr, uInt8 value)
+	{
+		PageAccess& access = myPageAccessTable[(addr & myAddressMask) >> myPageShift];
 
+		// See if this page uses direct accessing or not 
+		if (access.directPokeBase != 0)
+		{
+			*(access.directPokeBase + (addr & myPageMask)) = value;
+		}
+		else
+		{
+			access.device->poke(addr, value);
+		}
+
+#ifdef DEBUGGER_SUPPORT
+		if (!myDataBusLocked)
+#endif
+			myDataBusState = value;
+	}
     /**
       Lock/unlock the data bus. When the bus is locked, peek() and
       poke() don't update the bus state. The bus should be unlocked

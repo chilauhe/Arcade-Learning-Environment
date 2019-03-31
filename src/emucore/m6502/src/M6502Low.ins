@@ -281,26 +281,26 @@ case 0x69:
 {
   uInt8 oldA = A;
 
-  if(!D)
+  if(!ST.D)
   {
-    Int16 sum = (Int16)((Int8)A) + (Int16)((Int8)operand) + (C ? 1 : 0);
-    V = ((sum > 127) || (sum < -128));
+    Int16 sum = (Int16)((Int8)A) + (Int16)((Int8)operand) + (ST.C ? 1 : 0);
+   ST.V = ((sum > 127) || (sum < -128));
 
-    sum = (Int16)A + (Int16)operand + (C ? 1 : 0);
+    sum = (Int16)A + (Int16)operand + (ST.C ? 1 : 0);
     A = sum;
-    C = (sum > 0xff);
-    notZ = A;
-    N = A & 0x80;
+   ST.C = (sum > 0xff);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
   }
   else
   {
-    Int16 sum = ourBCDTable[0][A] + ourBCDTable[0][operand] + (C ? 1 : 0);
+    Int16 sum = ourBCDTable[0][A] + ourBCDTable[0][operand] + (ST.C ? 1 : 0);
 
-    C = (sum > 99);
+   ST.C = (sum > 99);
     A = ourBCDTable[1][sum & 0xff];
-    notZ = A;
-    N = A & 0x80;
-    V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
+   ST.V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
   }
 }
 break;
@@ -313,26 +313,26 @@ case 0x65:
 {
   uInt8 oldA = A;
 
-  if(!D)
+  if(!ST.D)
   {
-    Int16 sum = (Int16)((Int8)A) + (Int16)((Int8)operand) + (C ? 1 : 0);
-    V = ((sum > 127) || (sum < -128));
+    Int16 sum = (Int16)((Int8)A) + (Int16)((Int8)operand) + (ST.C ? 1 : 0);
+   ST.V = ((sum > 127) || (sum < -128));
 
-    sum = (Int16)A + (Int16)operand + (C ? 1 : 0);
+    sum = (Int16)A + (Int16)operand + (ST.C ? 1 : 0);
     A = sum;
-    C = (sum > 0xff);
-    notZ = A;
-    N = A & 0x80;
+    ST.C = (sum > 0xff);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
   }
   else
   {
-    Int16 sum = ourBCDTable[0][A] + ourBCDTable[0][operand] + (C ? 1 : 0);
+    Int16 sum = ourBCDTable[0][A] + ourBCDTable[0][operand] + (ST.C ? 1 : 0);
 
-    C = (sum > 99);
+    ST.C = (sum > 99);
     A = ourBCDTable[1][sum & 0xff];
-    notZ = A;
-    N = A & 0x80;
-    V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
+   ST.V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
   }
 }
 break;
@@ -345,26 +345,26 @@ case 0x75:
 {
   uInt8 oldA = A;
 
-  if(!D)
+  if(!ST.D)
   {
-    Int16 sum = (Int16)((Int8)A) + (Int16)((Int8)operand) + (C ? 1 : 0);
-    V = ((sum > 127) || (sum < -128));
+    Int16 sum = (Int16)((Int8)A) + (Int16)((Int8)operand) + (ST.C ? 1 : 0);
+   ST.V = ((sum > 127) || (sum < -128));
 
-    sum = (Int16)A + (Int16)operand + (C ? 1 : 0);
+    sum = (Int16)A + (Int16)operand + (ST.C ? 1 : 0);
     A = sum;
-    C = (sum > 0xff);
-    notZ = A;
-    N = A & 0x80;
+   ST.C = (sum > 0xff);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
   }
   else
   {
-    Int16 sum = ourBCDTable[0][A] + ourBCDTable[0][operand] + (C ? 1 : 0);
+    Int16 sum = ourBCDTable[0][A] + ourBCDTable[0][operand] + (ST.C ? 1 : 0);
 
-    C = (sum > 99);
+   ST.C = (sum > 99);
     A = ourBCDTable[1][sum & 0xff];
-    notZ = A;
-    N = A & 0x80;
-    V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
+   ST.V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
   }
 }
 break;
@@ -378,26 +378,26 @@ case 0x6d:
 {
   uInt8 oldA = A;
 
-  if(!D)
+  if(!ST.D)
   {
-    Int16 sum = (Int16)((Int8)A) + (Int16)((Int8)operand) + (C ? 1 : 0);
-    V = ((sum > 127) || (sum < -128));
+    Int16 sum = (Int16)((Int8)A) + (Int16)((Int8)operand) + (ST.C ? 1 : 0);
+   ST.V = ((sum > 127) || (sum < -128));
 
-    sum = (Int16)A + (Int16)operand + (C ? 1 : 0);
+    sum = (Int16)A + (Int16)operand + (ST.C ? 1 : 0);
     A = sum;
-    C = (sum > 0xff);
-    notZ = A;
-    N = A & 0x80;
+   ST.C = (sum > 0xff);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
   }
   else
   {
-    Int16 sum = ourBCDTable[0][A] + ourBCDTable[0][operand] + (C ? 1 : 0);
+    Int16 sum = ourBCDTable[0][A] + ourBCDTable[0][operand] + (ST.C ? 1 : 0);
 
-    C = (sum > 99);
+   ST.C = (sum > 99);
     A = ourBCDTable[1][sum & 0xff];
-    notZ = A;
-    N = A & 0x80;
-    V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
+   ST.V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
   }
 }
 break;
@@ -419,26 +419,26 @@ case 0x7d:
 {
   uInt8 oldA = A;
 
-  if(!D)
+  if(!ST.D)
   {
-    Int16 sum = (Int16)((Int8)A) + (Int16)((Int8)operand) + (C ? 1 : 0);
-    V = ((sum > 127) || (sum < -128));
+    Int16 sum = (Int16)((Int8)A) + (Int16)((Int8)operand) + (ST.C ? 1 : 0);
+   ST.V = ((sum > 127) || (sum < -128));
 
-    sum = (Int16)A + (Int16)operand + (C ? 1 : 0);
+    sum = (Int16)A + (Int16)operand + (ST.C ? 1 : 0);
     A = sum;
-    C = (sum > 0xff);
-    notZ = A;
-    N = A & 0x80;
+   ST.C = (sum > 0xff);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
   }
   else
   {
-    Int16 sum = ourBCDTable[0][A] + ourBCDTable[0][operand] + (C ? 1 : 0);
+    Int16 sum = ourBCDTable[0][A] + ourBCDTable[0][operand] + (ST.C ? 1 : 0);
 
-    C = (sum > 99);
+   ST.C = (sum > 99);
     A = ourBCDTable[1][sum & 0xff];
-    notZ = A;
-    N = A & 0x80;
-    V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
+   ST.V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
   }
 }
 break;
@@ -460,26 +460,26 @@ case 0x79:
 {
   uInt8 oldA = A;
 
-  if(!D)
+  if(!ST.D)
   {
-    Int16 sum = (Int16)((Int8)A) + (Int16)((Int8)operand) + (C ? 1 : 0);
-    V = ((sum > 127) || (sum < -128));
+    Int16 sum = (Int16)((Int8)A) + (Int16)((Int8)operand) + (ST.C ? 1 : 0);
+   ST.V = ((sum > 127) || (sum < -128));
 
-    sum = (Int16)A + (Int16)operand + (C ? 1 : 0);
+    sum = (Int16)A + (Int16)operand + (ST.C ? 1 : 0);
     A = sum;
-    C = (sum > 0xff);
-    notZ = A;
-    N = A & 0x80;
+    ST.C = (sum > 0xff);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
   }
   else
   {
-    Int16 sum = ourBCDTable[0][A] + ourBCDTable[0][operand] + (C ? 1 : 0);
+    Int16 sum = ourBCDTable[0][A] + ourBCDTable[0][operand] + (ST.C ? 1 : 0);
 
-    C = (sum > 99);
+   ST.C = (sum > 99);
     A = ourBCDTable[1][sum & 0xff];
-    notZ = A;
-    N = A & 0x80;
-    V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
+   ST.V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
   }
 }
 break;
@@ -493,26 +493,26 @@ case 0x61:
 {
   uInt8 oldA = A;
 
-  if(!D)
+  if(!ST.D)
   {
-    Int16 sum = (Int16)((Int8)A) + (Int16)((Int8)operand) + (C ? 1 : 0);
-    V = ((sum > 127) || (sum < -128));
+    Int16 sum = (Int16)((Int8)A) + (Int16)((Int8)operand) + (ST.C ? 1 : 0);
+   ST.V = ((sum > 127) || (sum < -128));
 
-    sum = (Int16)A + (Int16)operand + (C ? 1 : 0);
+    sum = (Int16)A + (Int16)operand + (ST.C ? 1 : 0);
     A = sum;
-    C = (sum > 0xff);
-    notZ = A;
-    N = A & 0x80;
+   ST.C = (sum > 0xff);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
   }
   else
   {
-    Int16 sum = ourBCDTable[0][A] + ourBCDTable[0][operand] + (C ? 1 : 0);
+    Int16 sum = ourBCDTable[0][A] + ourBCDTable[0][operand] + (ST.C ? 1 : 0);
 
-    C = (sum > 99);
+   ST.C = (sum > 99);
     A = ourBCDTable[1][sum & 0xff];
-    notZ = A;
-    N = A & 0x80;
-    V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
+    ST.V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
   }
 }
 break;
@@ -533,26 +533,26 @@ case 0x71:
 {
   uInt8 oldA = A;
 
-  if(!D)
+  if(!ST.D)
   {
-    Int16 sum = (Int16)((Int8)A) + (Int16)((Int8)operand) + (C ? 1 : 0);
-    V = ((sum > 127) || (sum < -128));
+    Int16 sum = (Int16)((Int8)A) + (Int16)((Int8)operand) + (ST.C ? 1 : 0);
+    ST.V = ((sum > 127) || (sum < -128));
 
-    sum = (Int16)A + (Int16)operand + (C ? 1 : 0);
+    sum = (Int16)A + (Int16)operand + (ST.C ? 1 : 0);
     A = sum;
-    C = (sum > 0xff);
-    notZ = A;
-    N = A & 0x80;
+   ST.C = (sum > 0xff);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
   }
   else
   {
-    Int16 sum = ourBCDTable[0][A] + ourBCDTable[0][operand] + (C ? 1 : 0);
+    Int16 sum = ourBCDTable[0][A] + ourBCDTable[0][operand] + (ST.C ? 1 : 0);
 
-    C = (sum > 99);
+   ST.C = (sum > 99);
     A = ourBCDTable[1][sum & 0xff];
-    notZ = A;
-    N = A & 0x80;
-    V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
+   ST.V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
   }
 }
 break;
@@ -567,12 +567,12 @@ case 0x4b:
   A &= operand;
 
   // Set carry flag according to the right-most bit
-  C = A & 0x01;
+ ST.C = A & 0x01;
 
   A = (A >> 1) & 0x7f;
 
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -585,9 +585,9 @@ case 0x2b:
 }
 {
   A &= operand;
-  notZ = A;
-  N = A & 0x80;
-  C = N;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
+ ST.C = ST.N;
 }
 break;
 
@@ -599,8 +599,8 @@ case 0x29:
 }
 {
   A &= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -611,8 +611,8 @@ case 0x25:
 }
 {
   A &= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -623,8 +623,8 @@ case 0x35:
 }
 {
   A &= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -636,8 +636,8 @@ case 0x2d:
 }
 {
   A &= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -657,8 +657,8 @@ case 0x3d:
 }
 {
   A &= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -678,8 +678,8 @@ case 0x39:
 }
 {
   A &= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -691,8 +691,8 @@ case 0x21:
 }
 {
   A &= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -711,8 +711,8 @@ case 0x31:
 }
 {
   A &= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -727,8 +727,8 @@ case 0x8b:
   // information from the 64doc.txt file.  This instruction is
   // reported to be unstable!
   A = (A | 0xee) & X & operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -742,25 +742,25 @@ case 0x6b:
   // NOTE: The implementation of this instruction is based on
   // information from the 64doc.txt file.  There are mixed
   // reports on its operation!
-  if(!D)
+  if(!ST.D)
   {
     A &= operand;
-    A = ((A >> 1) & 0x7f) | (C ? 0x80 : 0x00);
+    A = ((A >> 1) & 0x7f) | (ST.C ? 0x80 : 0x00);
 
-    C = A & 0x40;
-    V = (A & 0x40) ^ ((A & 0x20) << 1);
+   ST.C = A & 0x40;
+   ST.V = (A & 0x40) ^ ((A & 0x20) << 1);
 
-    notZ = A;
-    N = A & 0x80;
+    ST.notZ = A;
+    ST.N =  A & 0x80;
   }
   else
   {
     uInt8 value = A & operand;
 
-    A = ((value >> 1) & 0x7f) | (C ? 0x80 : 0x00);
-    N = C;
-    notZ = A;
-    V = (value ^ A) & 0x40;
+    A = ((value >> 1) & 0x7f) | (ST.C ? 0x80 : 0x00);
+    ST.N =  ST.C;
+    ST.notZ = A;
+   ST.V = (value ^ A) & 0x40;
 
     if(((value & 0x0f) + (value & 0x01)) > 0x05)
     {
@@ -770,11 +770,11 @@ case 0x6b:
     if(((value & 0xf0) + (value & 0x10)) > 0x50) 
     {
       A = (A + 0x60) & 0xff;
-      C = 1;
+     ST.C = 1;
     }
     else
     {
-      C = 0;
+     ST.C = 0;
     }
   }
 }
@@ -786,12 +786,12 @@ case 0x0a:
 }
 {
   // Set carry flag according to the left-most bit in A
-  C = A & 0x80;
+ ST.C = A & 0x80;
 
   A <<= 1;
 
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -802,13 +802,13 @@ case 0x06:
 }
 {
   // Set carry flag according to the left-most bit in value
-  C = operand & 0x80;
+ ST.C = operand & 0x80;
 
   operand <<= 1;
   poke(operandAddress, operand);
 
-  notZ = operand;
-  N = operand & 0x80;
+  ST.notZ = operand;
+  ST.N =  operand & 0x80;
 }
 break;
 
@@ -819,13 +819,13 @@ case 0x16:
 }
 {
   // Set carry flag according to the left-most bit in value
-  C = operand & 0x80;
+ ST.C = operand & 0x80;
 
   operand <<= 1;
   poke(operandAddress, operand);
 
-  notZ = operand;
-  N = operand & 0x80;
+  ST.notZ = operand;
+  ST.N =  operand & 0x80;
 }
 break;
 
@@ -837,13 +837,13 @@ case 0x0e:
 }
 {
   // Set carry flag according to the left-most bit in value
-  C = operand & 0x80;
+ ST.C = operand & 0x80;
 
   operand <<= 1;
   poke(operandAddress, operand);
 
-  notZ = operand;
-  N = operand & 0x80;
+  ST.notZ = operand;
+  ST.N =  operand & 0x80;
 }
 break;
 
@@ -856,13 +856,13 @@ case 0x1e:
 }
 {
   // Set carry flag according to the left-most bit in value
-  C = operand & 0x80;
+ ST.C = operand & 0x80;
 
   operand <<= 1;
   poke(operandAddress, operand);
 
-  notZ = operand;
-  N = operand & 0x80;
+  ST.notZ = operand;
+  ST.N =  operand & 0x80;
 }
 break;
 
@@ -873,7 +873,7 @@ case 0x90:
   operand = peek(operandAddress);
 }
 {
-  if(!C)
+  if(!ST.C)
   {
     uInt16 address = PC + (Int8)operand;
     mySystem->incrementCycles(NOTSAMEPAGE(PC, address) ?
@@ -890,7 +890,7 @@ case 0xb0:
   operand = peek(operandAddress);
 }
 {
-  if(C)
+  if(ST.C)
   {
     uInt16 address = PC + (Int8)operand;
     mySystem->incrementCycles(NOTSAMEPAGE(PC, address) ?
@@ -907,7 +907,7 @@ case 0xf0:
   operand = peek(operandAddress);
 }
 {
-  if(!notZ)
+  if(!ST.notZ)
   {
     uInt16 address = PC + (Int8)operand;
     mySystem->incrementCycles(NOTSAMEPAGE(PC, address) ?
@@ -924,9 +924,9 @@ case 0x24:
   operand = peek(operandAddress);
 }
 {
-  notZ = (A & operand);
-  N = operand & 0x80;
-  V = operand & 0x40;
+  ST.notZ = (A & operand);
+  ST.N =  operand & 0x80;
+ ST.V = operand & 0x40;
 }
 break;
 
@@ -937,9 +937,9 @@ case 0x2C:
   operand = peek(operandAddress);
 }
 {
-  notZ = (A & operand);
-  N = operand & 0x80;
-  V = operand & 0x40;
+  ST.notZ = (A & operand);
+  ST.N =  operand & 0x80;
+ ST.V = operand & 0x40;
 }
 break;
 
@@ -950,7 +950,7 @@ case 0x30:
   operand = peek(operandAddress);
 }
 {
-  if(N)
+  if(ST.N)
   {
     uInt16 address = PC + (Int8)operand;
     mySystem->incrementCycles(NOTSAMEPAGE(PC, address) ?
@@ -967,7 +967,7 @@ case 0xD0:
   operand = peek(operandAddress);
 }
 {
-  if(notZ)
+  if(ST.notZ)
   {
     uInt16 address = PC + (Int8)operand;
     mySystem->incrementCycles(NOTSAMEPAGE(PC, address) ?
@@ -984,7 +984,7 @@ case 0x10:
   operand = peek(operandAddress);
 }
 {
-  if(!N)
+  if(!ST.N)
   {
     uInt16 address = PC + (Int8)operand;
     mySystem->incrementCycles(NOTSAMEPAGE(PC, address) ?
@@ -999,13 +999,13 @@ case 0x00:
 {
   peek(PC++);
 
-  B = true;
+  ST.B = true;
 
   poke(0x0100 + SP--, PC >> 8);
   poke(0x0100 + SP--, PC & 0x00ff);
   poke(0x0100 + SP--, PS());
 
-  I = true;
+  ST.I = true;
 
   PC = peek(0xfffe);
   PC |= ((uInt16)peek(0xffff) << 8);
@@ -1019,7 +1019,7 @@ case 0x50:
   operand = peek(operandAddress);
 }
 {
-  if(!V)
+  if(!ST.V)
   {
     uInt16 address = PC + (Int8)operand;
     mySystem->incrementCycles(NOTSAMEPAGE(PC, address) ?
@@ -1036,7 +1036,7 @@ case 0x70:
   operand = peek(operandAddress);
 }
 {
-  if(V)
+  if(ST.V)
   {
     uInt16 address = PC + (Int8)operand;
     mySystem->incrementCycles(NOTSAMEPAGE(PC, address) ?
@@ -1051,7 +1051,7 @@ case 0x18:
 {
 }
 {
-  C = false;
+ ST.C = false;
 }
 break;
 
@@ -1060,7 +1060,7 @@ case 0xd8:
 {
 }
 {
-  D = false;
+  ST.D = false;
 }
 break;
 
@@ -1069,7 +1069,7 @@ case 0x58:
 {
 }
 {
-  I = false;
+  ST.I = false;
 }
 break;
 
@@ -1078,7 +1078,7 @@ case 0xb8:
 {
 }
 {
-  V = false;
+ ST.V = false;
 }
 break;
 
@@ -1091,9 +1091,9 @@ case 0xc9:
 {
   uInt16 value = (uInt16)A - (uInt16)operand;
 
-  notZ = value;
-  N = value & 0x0080;
-  C = !(value & 0x0100);
+  ST.notZ = value;
+  ST.N =  value & 0x0080;
+ ST.C = !(value & 0x0100);
 }
 break;
 
@@ -1105,9 +1105,9 @@ case 0xc5:
 {
   uInt16 value = (uInt16)A - (uInt16)operand;
 
-  notZ = value;
-  N = value & 0x0080;
-  C = !(value & 0x0100);
+  ST.notZ = value;
+  ST.N =  value & 0x0080;
+ ST.C = !(value & 0x0100);
 }
 break;
 
@@ -1119,9 +1119,9 @@ case 0xd5:
 {
   uInt16 value = (uInt16)A - (uInt16)operand;
 
-  notZ = value;
-  N = value & 0x0080;
-  C = !(value & 0x0100);
+  ST.notZ = value;
+  ST.N =  value & 0x0080;
+ ST.C = !(value & 0x0100);
 }
 break;
 
@@ -1134,9 +1134,9 @@ case 0xcd:
 {
   uInt16 value = (uInt16)A - (uInt16)operand;
 
-  notZ = value;
-  N = value & 0x0080;
-  C = !(value & 0x0100);
+  ST.notZ = value;
+  ST.N =  value & 0x0080;
+ ST.C = !(value & 0x0100);
 }
 break;
 
@@ -1157,9 +1157,9 @@ case 0xdd:
 {
   uInt16 value = (uInt16)A - (uInt16)operand;
 
-  notZ = value;
-  N = value & 0x0080;
-  C = !(value & 0x0100);
+  ST.notZ = value;
+  ST.N =  value & 0x0080;
+ ST.C = !(value & 0x0100);
 }
 break;
 
@@ -1180,9 +1180,9 @@ case 0xd9:
 {
   uInt16 value = (uInt16)A - (uInt16)operand;
 
-  notZ = value;
-  N = value & 0x0080;
-  C = !(value & 0x0100);
+  ST.notZ = value;
+  ST.N =  value & 0x0080;
+ ST.C = !(value & 0x0100);
 }
 break;
 
@@ -1195,9 +1195,9 @@ case 0xc1:
 {
   uInt16 value = (uInt16)A - (uInt16)operand;
 
-  notZ = value;
-  N = value & 0x0080;
-  C = !(value & 0x0100);
+  ST.notZ = value;
+  ST.N =  value & 0x0080;
+ ST.C = !(value & 0x0100);
 }
 break;
 
@@ -1217,9 +1217,9 @@ case 0xd1:
 {
   uInt16 value = (uInt16)A - (uInt16)operand;
 
-  notZ = value;
-  N = value & 0x0080;
-  C = !(value & 0x0100);
+  ST.notZ = value;
+  ST.N =  value & 0x0080;
+ ST.C = !(value & 0x0100);
 }
 break;
 
@@ -1232,9 +1232,9 @@ case 0xe0:
 {
   uInt16 value = (uInt16)X - (uInt16)operand;
 
-  notZ = value;
-  N = value & 0x0080;
-  C = !(value & 0x0100);
+  ST.notZ = value;
+  ST.N =  value & 0x0080;
+ ST.C = !(value & 0x0100);
 }
 break;
 
@@ -1246,9 +1246,9 @@ case 0xe4:
 {
   uInt16 value = (uInt16)X - (uInt16)operand;
 
-  notZ = value;
-  N = value & 0x0080;
-  C = !(value & 0x0100);
+  ST.notZ = value;
+  ST.N =  value & 0x0080;
+ ST.C = !(value & 0x0100);
 }
 break;
 
@@ -1261,9 +1261,9 @@ case 0xec:
 {
   uInt16 value = (uInt16)X - (uInt16)operand;
 
-  notZ = value;
-  N = value & 0x0080;
-  C = !(value & 0x0100);
+  ST.notZ = value;
+  ST.N =  value & 0x0080;
+ ST.C = !(value & 0x0100);
 }
 break;
 
@@ -1276,9 +1276,9 @@ case 0xc0:
 {
   uInt16 value = (uInt16)Y - (uInt16)operand;
 
-  notZ = value;
-  N = value & 0x0080;
-  C = !(value & 0x0100);
+  ST.notZ = value;
+  ST.N =  value & 0x0080;
+ ST.C = !(value & 0x0100);
 }
 break;
 
@@ -1290,9 +1290,9 @@ case 0xc4:
 {
   uInt16 value = (uInt16)Y - (uInt16)operand;
 
-  notZ = value;
-  N = value & 0x0080;
-  C = !(value & 0x0100);
+  ST.notZ = value;
+  ST.N =  value & 0x0080;
+ ST.C = !(value & 0x0100);
 }
 break;
 
@@ -1305,9 +1305,9 @@ case 0xcc:
 {
   uInt16 value = (uInt16)Y - (uInt16)operand;
 
-  notZ = value;
-  N = value & 0x0080;
-  C = !(value & 0x0100);
+  ST.notZ = value;
+  ST.N =  value & 0x0080;
+ ST.C = !(value & 0x0100);
 }
 break;
 
@@ -1323,9 +1323,9 @@ case 0xcf:
   poke(operandAddress, value);
 
   uInt16 value2 = (uInt16)A - (uInt16)value;
-  notZ = value2;
-  N = value2 & 0x0080;
-  C = !(value2 & 0x0100);
+  ST.notZ = value2;
+  ST.N =  value2 & 0x0080;
+ ST.C = !(value2 & 0x0100);
 }
 break;
 
@@ -1341,9 +1341,9 @@ case 0xdf:
   poke(operandAddress, value);
 
   uInt16 value2 = (uInt16)A - (uInt16)value;
-  notZ = value2;
-  N = value2 & 0x0080;
-  C = !(value2 & 0x0100);
+  ST.notZ = value2;
+  ST.N =  value2 & 0x0080;
+ ST.C = !(value2 & 0x0100);
 }
 break;
 
@@ -1359,9 +1359,9 @@ case 0xdb:
   poke(operandAddress, value);
 
   uInt16 value2 = (uInt16)A - (uInt16)value;
-  notZ = value2;
-  N = value2 & 0x0080;
-  C = !(value2 & 0x0100);
+  ST.notZ = value2;
+  ST.N =  value2 & 0x0080;
+ ST.C = !(value2 & 0x0100);
 }
 break;
 
@@ -1375,9 +1375,9 @@ case 0xc7:
   poke(operandAddress, value);
 
   uInt16 value2 = (uInt16)A - (uInt16)value;
-  notZ = value2;
-  N = value2 & 0x0080;
-  C = !(value2 & 0x0100);
+  ST.notZ = value2;
+  ST.N =  value2 & 0x0080;
+ ST.C = !(value2 & 0x0100);
 }
 break;
 
@@ -1391,9 +1391,9 @@ case 0xd7:
   poke(operandAddress, value);
 
   uInt16 value2 = (uInt16)A - (uInt16)value;
-  notZ = value2;
-  N = value2 & 0x0080;
-  C = !(value2 & 0x0100);
+  ST.notZ = value2;
+  ST.N =  value2 & 0x0080;
+ ST.C = !(value2 & 0x0100);
 }
 break;
 
@@ -1408,9 +1408,9 @@ case 0xc3:
   poke(operandAddress, value);
 
   uInt16 value2 = (uInt16)A - (uInt16)value;
-  notZ = value2;
-  N = value2 & 0x0080;
-  C = !(value2 & 0x0100);
+  ST.notZ = value2;
+  ST.N =  value2 & 0x0080;
+ ST.C = !(value2 & 0x0100);
 }
 break;
 
@@ -1426,9 +1426,9 @@ case 0xd3:
   poke(operandAddress, value);
 
   uInt16 value2 = (uInt16)A - (uInt16)value;
-  notZ = value2;
-  N = value2 & 0x0080;
-  C = !(value2 & 0x0100);
+  ST.notZ = value2;
+  ST.N =  value2 & 0x0080;
+ ST.C = !(value2 & 0x0100);
 }
 break;
 
@@ -1442,8 +1442,8 @@ case 0xc6:
   uInt8 value = operand - 1;
   poke(operandAddress, value);
 
-  notZ = value;
-  N = value & 0x80;
+  ST.notZ = value;
+  ST.N =  value & 0x80;
 }
 break;
 
@@ -1456,8 +1456,8 @@ case 0xd6:
   uInt8 value = operand - 1;
   poke(operandAddress, value);
 
-  notZ = value;
-  N = value & 0x80;
+  ST.notZ = value;
+  ST.N =  value & 0x80;
 }
 break;
 
@@ -1471,8 +1471,8 @@ case 0xce:
   uInt8 value = operand - 1;
   poke(operandAddress, value);
 
-  notZ = value;
-  N = value & 0x80;
+  ST.notZ = value;
+  ST.N =  value & 0x80;
 }
 break;
 
@@ -1487,8 +1487,8 @@ case 0xde:
   uInt8 value = operand - 1;
   poke(operandAddress, value);
 
-  notZ = value;
-  N = value & 0x80;
+  ST.notZ = value;
+  ST.N =  value & 0x80;
 }
 break;
 
@@ -1499,8 +1499,8 @@ case 0xca:
 {
   X--;
 
-  notZ = X;
-  N = X & 0x80;
+  ST.notZ = X;
+  ST.N =  X & 0x80;
 }
 break;
 
@@ -1511,8 +1511,8 @@ case 0x88:
 {
   Y--;
 
-  notZ = Y;
-  N = Y & 0x80;
+  ST.notZ = Y;
+  ST.N =  Y & 0x80;
 }
 break;
 
@@ -1524,8 +1524,8 @@ case 0x49:
 }
 {
   A ^= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -1536,8 +1536,8 @@ case 0x45:
 }
 {
   A ^= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -1548,8 +1548,8 @@ case 0x55:
 }
 {
   A ^= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -1561,8 +1561,8 @@ case 0x4d:
 }
 {
   A ^= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -1582,8 +1582,8 @@ case 0x5d:
 }
 {
   A ^= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -1603,8 +1603,8 @@ case 0x59:
 }
 {
   A ^= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -1616,8 +1616,8 @@ case 0x41:
 }
 {
   A ^= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -1636,8 +1636,8 @@ case 0x51:
 }
 {
   A ^= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -1651,8 +1651,8 @@ case 0xe6:
   uInt8 value = operand + 1;
   poke(operandAddress, value);
 
-  notZ = value;
-  N = value & 0x80;
+  ST.notZ = value;
+  ST.N =  value & 0x80;
 }
 break;
 
@@ -1665,8 +1665,8 @@ case 0xf6:
   uInt8 value = operand + 1;
   poke(operandAddress, value);
 
-  notZ = value;
-  N = value & 0x80;
+  ST.notZ = value;
+  ST.N =  value & 0x80;
 }
 break;
 
@@ -1680,8 +1680,8 @@ case 0xee:
   uInt8 value = operand + 1;
   poke(operandAddress, value);
 
-  notZ = value;
-  N = value & 0x80;
+  ST.notZ = value;
+  ST.N =  value & 0x80;
 }
 break;
 
@@ -1696,8 +1696,8 @@ case 0xfe:
   uInt8 value = operand + 1;
   poke(operandAddress, value);
 
-  notZ = value;
-  N = value & 0x80;
+  ST.notZ = value;
+  ST.N =  value & 0x80;
 }
 break;
 
@@ -1707,8 +1707,8 @@ case 0xe8:
 }
 {
   X++;
-  notZ = X;
-  N = X & 0x80;
+  ST.notZ = X;
+  ST.N =  X & 0x80;
 }
 break;
 
@@ -1718,8 +1718,8 @@ case 0xc8:
 }
 {
   Y++;
-  notZ = Y;
-  N = Y & 0x80;
+  ST.notZ = Y;
+  ST.N =  Y & 0x80;
 }
 break;
 
@@ -1736,32 +1736,32 @@ case 0xef:
 
   uInt8 oldA = A;
 
-  if(!D)
+  if(!ST.D)
   {
     operand = ~operand;
-    Int16 difference = (Int16)((Int8)A) + (Int16)((Int8)operand) + (C ? 1 : 0);
-    V = ((difference > 127) || (difference < -128));
+    Int16 difference = (Int16)((Int8)A) + (Int16)((Int8)operand) + (ST.C ? 1 : 0);
+   ST.V = ((difference > 127) || (difference < -128));
 
-    difference = ((Int16)A) + ((Int16)operand) + (C ? 1 : 0);
+    difference = ((Int16)A) + ((Int16)operand) + (ST.C ? 1 : 0);
     A = difference;
-    C = (difference > 0xff);
-    notZ = A;
-    N = A & 0x80;
+   ST.C = (difference > 0xff);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
   }
   else
   {
     Int16 difference = ourBCDTable[0][A] - ourBCDTable[0][operand] 
-        - (C ? 0 : 1);
+        - (ST.C ? 0 : 1);
 
     if(difference < 0)
       difference += 100;
 
     A = ourBCDTable[1][difference];
-    notZ = A;
-    N = A & 0x80;
+    ST.notZ = A;
+    ST.N =  A & 0x80;
 
-    C = (oldA >= (operand + (C ? 0 : 1)));
-    V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
+   ST.C = (oldA >= (operand + (ST.C ? 0 : 1)));
+   ST.V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
   }
 }
 break;
@@ -1779,32 +1779,32 @@ case 0xff:
 
   uInt8 oldA = A;
 
-  if(!D)
+  if(!ST.D)
   {
     operand = ~operand;
-    Int16 difference = (Int16)((Int8)A) + (Int16)((Int8)operand) + (C ? 1 : 0);
-    V = ((difference > 127) || (difference < -128));
+    Int16 difference = (Int16)((Int8)A) + (Int16)((Int8)operand) + (ST.C ? 1 : 0);
+   ST.V = ((difference > 127) || (difference < -128));
 
-    difference = ((Int16)A) + ((Int16)operand) + (C ? 1 : 0);
+    difference = ((Int16)A) + ((Int16)operand) + (ST.C ? 1 : 0);
     A = difference;
-    C = (difference > 0xff);
-    notZ = A;
-    N = A & 0x80;
+   ST.C = (difference > 0xff);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
   }
   else
   {
     Int16 difference = ourBCDTable[0][A] - ourBCDTable[0][operand] 
-        - (C ? 0 : 1);
+        - (ST.C ? 0 : 1);
 
     if(difference < 0)
       difference += 100;
 
     A = ourBCDTable[1][difference];
-    notZ = A;
-    N = A & 0x80;
+    ST.notZ = A;
+    ST.N =  A & 0x80;
 
-    C = (oldA >= (operand + (C ? 0 : 1)));
-    V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
+   ST.C = (oldA >= (operand + (ST.C ? 0 : 1)));
+   ST.V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
   }
 }
 break;
@@ -1822,32 +1822,32 @@ case 0xfb:
 
   uInt8 oldA = A;
 
-  if(!D)
+  if(!ST.D)
   {
     operand = ~operand;
-    Int16 difference = (Int16)((Int8)A) + (Int16)((Int8)operand) + (C ? 1 : 0);
-    V = ((difference > 127) || (difference < -128));
+    Int16 difference = (Int16)((Int8)A) + (Int16)((Int8)operand) + (ST.C ? 1 : 0);
+   ST.V = ((difference > 127) || (difference < -128));
 
-    difference = ((Int16)A) + ((Int16)operand) + (C ? 1 : 0);
+    difference = ((Int16)A) + ((Int16)operand) + (ST.C ? 1 : 0);
     A = difference;
-    C = (difference > 0xff);
-    notZ = A;
-    N = A & 0x80;
+   ST.C = (difference > 0xff);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
   }
   else
   {
     Int16 difference = ourBCDTable[0][A] - ourBCDTable[0][operand] 
-        - (C ? 0 : 1);
+        - (ST.C ? 0 : 1);
 
     if(difference < 0)
       difference += 100;
 
     A = ourBCDTable[1][difference];
-    notZ = A;
-    N = A & 0x80;
+    ST.notZ = A;
+    ST.N =  A & 0x80;
 
-    C = (oldA >= (operand + (C ? 0 : 1)));
-    V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
+   ST.C = (oldA >= (operand + (ST.C ? 0 : 1)));
+   ST.V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
   }
 }
 break;
@@ -1863,32 +1863,32 @@ case 0xe7:
 
   uInt8 oldA = A;
 
-  if(!D)
+  if(!ST.D)
   {
     operand = ~operand;
-    Int16 difference = (Int16)((Int8)A) + (Int16)((Int8)operand) + (C ? 1 : 0);
-    V = ((difference > 127) || (difference < -128));
+    Int16 difference = (Int16)((Int8)A) + (Int16)((Int8)operand) + (ST.C ? 1 : 0);
+   ST.V = ((difference > 127) || (difference < -128));
 
-    difference = ((Int16)A) + ((Int16)operand) + (C ? 1 : 0);
+    difference = ((Int16)A) + ((Int16)operand) + (ST.C ? 1 : 0);
     A = difference;
-    C = (difference > 0xff);
-    notZ = A;
-    N = A & 0x80;
+   ST.C = (difference > 0xff);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
   }
   else
   {
     Int16 difference = ourBCDTable[0][A] - ourBCDTable[0][operand] 
-        - (C ? 0 : 1);
+        - (ST.C ? 0 : 1);
 
     if(difference < 0)
       difference += 100;
 
     A = ourBCDTable[1][difference];
-    notZ = A;
-    N = A & 0x80;
+    ST.notZ = A;
+    ST.N =  A & 0x80;
 
-    C = (oldA >= (operand + (C ? 0 : 1)));
-    V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
+   ST.C = (oldA >= (operand + (ST.C ? 0 : 1)));
+   ST.V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
   }
 }
 break;
@@ -1904,32 +1904,32 @@ case 0xf7:
 
   uInt8 oldA = A;
 
-  if(!D)
+  if(!ST.D)
   {
     operand = ~operand;
-    Int16 difference = (Int16)((Int8)A) + (Int16)((Int8)operand) + (C ? 1 : 0);
-    V = ((difference > 127) || (difference < -128));
+    Int16 difference = (Int16)((Int8)A) + (Int16)((Int8)operand) + (ST.C ? 1 : 0);
+   ST.V = ((difference > 127) || (difference < -128));
 
-    difference = ((Int16)A) + ((Int16)operand) + (C ? 1 : 0);
+    difference = ((Int16)A) + ((Int16)operand) + (ST.C ? 1 : 0);
     A = difference;
-    C = (difference > 0xff);
-    notZ = A;
-    N = A & 0x80;
+   ST.C = (difference > 0xff);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
   }
   else
   {
     Int16 difference = ourBCDTable[0][A] - ourBCDTable[0][operand] 
-        - (C ? 0 : 1);
+        - (ST.C ? 0 : 1);
 
     if(difference < 0)
       difference += 100;
 
     A = ourBCDTable[1][difference];
-    notZ = A;
-    N = A & 0x80;
+    ST.notZ = A;
+    ST.N =  A & 0x80;
 
-    C = (oldA >= (operand + (C ? 0 : 1)));
-    V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
+   ST.C = (oldA >= (operand + (ST.C ? 0 : 1)));
+   ST.V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
   }
 }
 break;
@@ -1946,32 +1946,32 @@ case 0xe3:
 
   uInt8 oldA = A;
 
-  if(!D)
+  if(!ST.D)
   {
     operand = ~operand;
-    Int16 difference = (Int16)((Int8)A) + (Int16)((Int8)operand) + (C ? 1 : 0);
-    V = ((difference > 127) || (difference < -128));
+    Int16 difference = (Int16)((Int8)A) + (Int16)((Int8)operand) + (ST.C ? 1 : 0);
+   ST.V = ((difference > 127) || (difference < -128));
 
-    difference = ((Int16)A) + ((Int16)operand) + (C ? 1 : 0);
+    difference = ((Int16)A) + ((Int16)operand) + (ST.C ? 1 : 0);
     A = difference;
-    C = (difference > 0xff);
-    notZ = A;
-    N = A & 0x80;
+   ST.C = (difference > 0xff);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
   }
   else
   {
     Int16 difference = ourBCDTable[0][A] - ourBCDTable[0][operand] 
-        - (C ? 0 : 1);
+        - (ST.C ? 0 : 1);
 
     if(difference < 0)
       difference += 100;
 
     A = ourBCDTable[1][difference];
-    notZ = A;
-    N = A & 0x80;
+    ST.notZ = A;
+    ST.N =  A & 0x80;
 
-    C = (oldA >= (operand + (C ? 0 : 1)));
-    V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
+   ST.C = (oldA >= (operand + (ST.C ? 0 : 1)));
+   ST.V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
   }
 }
 break;
@@ -1989,32 +1989,32 @@ case 0xf3:
 
   uInt8 oldA = A;
 
-  if(!D)
+  if(!ST.D)
   {
     operand = ~operand;
-    Int16 difference = (Int16)((Int8)A) + (Int16)((Int8)operand) + (C ? 1 : 0);
-    V = ((difference > 127) || (difference < -128));
+    Int16 difference = (Int16)((Int8)A) + (Int16)((Int8)operand) + (ST.C ? 1 : 0);
+   ST.V = ((difference > 127) || (difference < -128));
 
-    difference = ((Int16)A) + ((Int16)operand) + (C ? 1 : 0);
+    difference = ((Int16)A) + ((Int16)operand) + (ST.C ? 1 : 0);
     A = difference;
-    C = (difference > 0xff);
-    notZ = A;
-    N = A & 0x80;
+   ST.C = (difference > 0xff);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
   }
   else
   {
     Int16 difference = ourBCDTable[0][A] - ourBCDTable[0][operand] 
-        - (C ? 0 : 1);
+        - (ST.C ? 0 : 1);
 
     if(difference < 0)
       difference += 100;
 
     A = ourBCDTable[1][difference];
-    notZ = A;
-    N = A & 0x80;
+    ST.notZ = A;
+    ST.N =  A & 0x80;
 
-    C = (oldA >= (operand + (C ? 0 : 1)));
-    V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
+   ST.C = (oldA >= (operand + (ST.C ? 0 : 1)));
+   ST.V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
   }
 }
 break;
@@ -2078,8 +2078,8 @@ case 0xbb:
 }
 {
   A = X = SP = SP & operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -2093,8 +2093,8 @@ case 0xaf:
 {
   A = operand;
   X = operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -2115,8 +2115,8 @@ case 0xbf:
 {
   A = operand;
   X = operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -2128,8 +2128,8 @@ case 0xa7:
 {
   A = operand;
   X = operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -2141,8 +2141,8 @@ case 0xb7:
 {
   A = operand;
   X = operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -2155,8 +2155,8 @@ case 0xa3:
 {
   A = operand;
   X = operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -2176,8 +2176,8 @@ case 0xb3:
 {
   A = operand;
   X = operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -2189,8 +2189,8 @@ case 0xa9:
 }
 {
   A = operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -2201,8 +2201,8 @@ case 0xa5:
 }
 {
   A = operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -2213,8 +2213,8 @@ case 0xb5:
 }
 {
   A = operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -2226,8 +2226,8 @@ case 0xad:
 }
 {
   A = operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -2247,8 +2247,8 @@ case 0xbd:
 }
 {
   A = operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -2268,8 +2268,8 @@ case 0xb9:
 }
 {
   A = operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -2281,8 +2281,8 @@ case 0xa1:
 }
 {
   A = operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -2301,8 +2301,8 @@ case 0xb1:
 }
 {
   A = operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -2314,8 +2314,8 @@ case 0xa2:
 }
 {
   X = operand;
-  notZ = X;
-  N = X & 0x80;
+  ST.notZ = X;
+  ST.N =  X & 0x80;
 }
 break;
 
@@ -2326,8 +2326,8 @@ case 0xa6:
 }
 {
   X = operand;
-  notZ = X;
-  N = X & 0x80;
+  ST.notZ = X;
+  ST.N =  X & 0x80;
 }
 break;
 
@@ -2338,8 +2338,8 @@ case 0xb6:
 }
 {
   X = operand;
-  notZ = X;
-  N = X & 0x80;
+  ST.notZ = X;
+  ST.N =  X & 0x80;
 }
 break;
 
@@ -2351,8 +2351,8 @@ case 0xae:
 }
 {
   X = operand;
-  notZ = X;
-  N = X & 0x80;
+  ST.notZ = X;
+  ST.N =  X & 0x80;
 }
 break;
 
@@ -2372,8 +2372,8 @@ case 0xbe:
 }
 {
   X = operand;
-  notZ = X;
-  N = X & 0x80;
+  ST.notZ = X;
+  ST.N =  X & 0x80;
 }
 break;
 
@@ -2385,8 +2385,8 @@ case 0xa0:
 }
 {
   Y = operand;
-  notZ = Y;
-  N = Y & 0x80;
+  ST.notZ = Y;
+  ST.N =  Y & 0x80;
 }
 break;
 
@@ -2397,8 +2397,8 @@ case 0xa4:
 }
 {
   Y = operand;
-  notZ = Y;
-  N = Y & 0x80;
+  ST.notZ = Y;
+  ST.N =  Y & 0x80;
 }
 break;
 
@@ -2409,8 +2409,8 @@ case 0xb4:
 }
 {
   Y = operand;
-  notZ = Y;
-  N = Y & 0x80;
+  ST.notZ = Y;
+  ST.N =  Y & 0x80;
 }
 break;
 
@@ -2422,8 +2422,8 @@ case 0xac:
 }
 {
   Y = operand;
-  notZ = Y;
-  N = Y & 0x80;
+  ST.notZ = Y;
+  ST.N =  Y & 0x80;
 }
 break;
 
@@ -2443,8 +2443,8 @@ case 0xbc:
 }
 {
   Y = operand;
-  notZ = Y;
-  N = Y & 0x80;
+  ST.notZ = Y;
+  ST.N =  Y & 0x80;
 }
 break;
 
@@ -2454,12 +2454,12 @@ case 0x4a:
 }
 {
   // Set carry flag according to the right-most bit
-  C = A & 0x01;
+ ST.C = A & 0x01;
 
   A = (A >> 1) & 0x7f;
 
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -2471,13 +2471,13 @@ case 0x46:
 }
 {
   // Set carry flag according to the right-most bit in value
-  C = operand & 0x01;
+ ST.C = operand & 0x01;
 
   operand = (operand >> 1) & 0x7f;
   poke(operandAddress, operand);
 
-  notZ = operand;
-  N = operand & 0x80;
+  ST.notZ = operand;
+  ST.N =  operand & 0x80;
 }
 break;
 
@@ -2488,13 +2488,13 @@ case 0x56:
 }
 {
   // Set carry flag according to the right-most bit in value
-  C = operand & 0x01;
+ ST.C = operand & 0x01;
 
   operand = (operand >> 1) & 0x7f;
   poke(operandAddress, operand);
 
-  notZ = operand;
-  N = operand & 0x80;
+  ST.notZ = operand;
+  ST.N =  operand & 0x80;
 }
 break;
 
@@ -2506,13 +2506,13 @@ case 0x4e:
 }
 {
   // Set carry flag according to the right-most bit in value
-  C = operand & 0x01;
+ ST.C = operand & 0x01;
 
   operand = (operand >> 1) & 0x7f;
   poke(operandAddress, operand);
 
-  notZ = operand;
-  N = operand & 0x80;
+  ST.notZ = operand;
+  ST.N =  operand & 0x80;
 }
 break;
 
@@ -2525,13 +2525,13 @@ case 0x5e:
 }
 {
   // Set carry flag according to the right-most bit in value
-  C = operand & 0x01;
+ ST.C = operand & 0x01;
 
   operand = (operand >> 1) & 0x7f;
   poke(operandAddress, operand);
 
-  notZ = operand;
-  N = operand & 0x80;
+  ST.notZ = operand;
+  ST.N =  operand & 0x80;
 }
 break;
 
@@ -2546,8 +2546,8 @@ case 0xab:
   // information from the 64doc.txt file.  This instruction is
   // reported to be very unstable!
   A = X = (A | 0xee) & operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -2644,8 +2644,8 @@ case 0x09:
 }
 {
   A |= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -2656,8 +2656,8 @@ case 0x05:
 }
 {
   A |= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -2668,8 +2668,8 @@ case 0x15:
 }
 {
   A |= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -2681,8 +2681,8 @@ case 0x0d:
 }
 {
   A |= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -2702,8 +2702,8 @@ case 0x1d:
 }
 {
   A |= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -2723,8 +2723,8 @@ case 0x19:
 }
 {
   A |= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -2736,8 +2736,8 @@ case 0x01:
 }
 {
   A |= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -2756,8 +2756,8 @@ case 0x11:
 }
 {
   A |= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -2786,8 +2786,8 @@ case 0x68:
 {
   peek(0x0100 + SP++);
   A = peek(0x0100 + SP);
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -2809,13 +2809,13 @@ case 0x2f:
   operand = peek(operandAddress);
 }
 {
-  uInt8 value = (operand << 1) | (C ? 1 : 0);
+  uInt8 value = (operand << 1) | (ST.C ? 1 : 0);
   poke(operandAddress, value);
 
   A &= value;
-  C = operand & 0x80;
-  notZ = A;
-  N = A & 0x80;
+ ST.C = operand & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -2827,13 +2827,13 @@ case 0x3f:
   operand = peek(operandAddress);
 }
 {
-  uInt8 value = (operand << 1) | (C ? 1 : 0);
+  uInt8 value = (operand << 1) | (ST.C ? 1 : 0);
   poke(operandAddress, value);
 
   A &= value;
-  C = operand & 0x80;
-  notZ = A;
-  N = A & 0x80;
+ ST.C = operand & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -2845,13 +2845,13 @@ case 0x3b:
   operand = peek(operandAddress);
 }
 {
-  uInt8 value = (operand << 1) | (C ? 1 : 0);
+  uInt8 value = (operand << 1) | (ST.C ? 1 : 0);
   poke(operandAddress, value);
 
   A &= value;
-  C = operand & 0x80;
-  notZ = A;
-  N = A & 0x80;
+ ST.C = operand & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -2861,13 +2861,13 @@ case 0x27:
   operand = peek(operandAddress);
 }
 {
-  uInt8 value = (operand << 1) | (C ? 1 : 0);
+  uInt8 value = (operand << 1) | (ST.C ? 1 : 0);
   poke(operandAddress, value);
 
   A &= value;
-  C = operand & 0x80;
-  notZ = A;
-  N = A & 0x80;
+ ST.C = operand & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -2877,13 +2877,13 @@ case 0x37:
   operand = peek(operandAddress);
 }
 {
-  uInt8 value = (operand << 1) | (C ? 1 : 0);
+  uInt8 value = (operand << 1) | (ST.C ? 1 : 0);
   poke(operandAddress, value);
 
   A &= value;
-  C = operand & 0x80;
-  notZ = A;
-  N = A & 0x80;
+ ST.C = operand & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -2894,13 +2894,13 @@ case 0x23:
   operand = peek(operandAddress);
 }
 {
-  uInt8 value = (operand << 1) | (C ? 1 : 0);
+  uInt8 value = (operand << 1) | (ST.C ? 1 : 0);
   poke(operandAddress, value);
 
   A &= value;
-  C = operand & 0x80;
-  notZ = A;
-  N = A & 0x80;
+ ST.C = operand & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -2912,13 +2912,13 @@ case 0x33:
   operand = peek(operandAddress);
 }
 {
-  uInt8 value = (operand << 1) | (C ? 1 : 0);
+  uInt8 value = (operand << 1) | (ST.C ? 1 : 0);
   poke(operandAddress, value);
 
   A &= value;
-  C = operand & 0x80;
-  notZ = A;
-  N = A & 0x80;
+ ST.C = operand & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -2927,15 +2927,15 @@ case 0x2a:
 {
 }
 {
-  bool oldC = C;
+  bool oldC = ST.C;
 
   // Set carry flag according to the left-most bit
-  C = A & 0x80;
+ ST.C = A & 0x80;
 
   A = (A << 1) | (oldC ? 1 : 0);
 
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -2946,16 +2946,16 @@ case 0x26:
   operand = peek(operandAddress);
 }
 {
-  bool oldC = C;
+  bool oldC = ST.C;
 
   // Set carry flag according to the left-most bit in operand
-  C = operand & 0x80;
+ ST.C = operand & 0x80;
 
   operand = (operand << 1) | (oldC ? 1 : 0);
   poke(operandAddress, operand);
 
-  notZ = operand;
-  N = operand & 0x80;
+  ST.notZ = operand;
+  ST.N =  operand & 0x80;
 }
 break;
 
@@ -2965,16 +2965,16 @@ case 0x36:
   operand = peek(operandAddress);
 }
 {
-  bool oldC = C;
+  bool oldC = ST.C;
 
   // Set carry flag according to the left-most bit in operand
-  C = operand & 0x80;
+ ST.C = operand & 0x80;
 
   operand = (operand << 1) | (oldC ? 1 : 0);
   poke(operandAddress, operand);
 
-  notZ = operand;
-  N = operand & 0x80;
+  ST.notZ = operand;
+  ST.N =  operand & 0x80;
 }
 break;
 
@@ -2985,16 +2985,16 @@ case 0x2e:
   operand = peek(operandAddress);
 }
 {
-  bool oldC = C;
+  bool oldC = ST.C;
 
   // Set carry flag according to the left-most bit in operand
-  C = operand & 0x80;
+ ST.C = operand & 0x80;
 
   operand = (operand << 1) | (oldC ? 1 : 0);
   poke(operandAddress, operand);
 
-  notZ = operand;
-  N = operand & 0x80;
+  ST.notZ = operand;
+  ST.N =  operand & 0x80;
 }
 break;
 
@@ -3006,16 +3006,16 @@ case 0x3e:
   operand = peek(operandAddress);
 }
 {
-  bool oldC = C;
+  bool oldC = ST.C;
 
   // Set carry flag according to the left-most bit in operand
-  C = operand & 0x80;
+ ST.C = operand & 0x80;
 
   operand = (operand << 1) | (oldC ? 1 : 0);
   poke(operandAddress, operand);
 
-  notZ = operand;
-  N = operand & 0x80;
+  ST.notZ = operand;
+  ST.N =  operand & 0x80;
 }
 break;
 
@@ -3024,15 +3024,15 @@ case 0x6a:
 {
 }
 {
-  bool oldC = C;
+  bool oldC = ST.C;
 
   // Set carry flag according to the right-most bit
-  C = A & 0x01;
+ ST.C = A & 0x01;
 
   A = ((A >> 1) & 0x7f) | (oldC ? 0x80 : 0x00);
 
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -3042,16 +3042,16 @@ case 0x66:
   operand = peek(operandAddress);
 }
 {
-  bool oldC = C;
+  bool oldC = ST.C;
 
   // Set carry flag according to the right-most bit
-  C = operand & 0x01;
+ ST.C = operand & 0x01;
 
   operand = ((operand >> 1) & 0x7f) | (oldC ? 0x80 : 0x00);
   poke(operandAddress, operand);
 
-  notZ = operand;
-  N = operand & 0x80;
+  ST.notZ = operand;
+  ST.N =  operand & 0x80;
 }
 break;
 
@@ -3061,16 +3061,16 @@ case 0x76:
   operand = peek(operandAddress);
 }
 {
-  bool oldC = C;
+  bool oldC = ST.C;
 
   // Set carry flag according to the right-most bit
-  C = operand & 0x01;
+ ST.C = operand & 0x01;
 
   operand = ((operand >> 1) & 0x7f) | (oldC ? 0x80 : 0x00);
   poke(operandAddress, operand);
 
-  notZ = operand;
-  N = operand & 0x80;
+  ST.notZ = operand;
+  ST.N =  operand & 0x80;
 }
 break;
 
@@ -3081,16 +3081,16 @@ case 0x6e:
   operand = peek(operandAddress);
 }
 {
-  bool oldC = C;
+  bool oldC = ST.C;
 
   // Set carry flag according to the right-most bit
-  C = operand & 0x01;
+ ST.C = operand & 0x01;
 
   operand = ((operand >> 1) & 0x7f) | (oldC ? 0x80 : 0x00);
   poke(operandAddress, operand);
 
-  notZ = operand;
-  N = operand & 0x80;
+  ST.notZ = operand;
+  ST.N =  operand & 0x80;
 }
 break;
 
@@ -3102,16 +3102,16 @@ case 0x7e:
   operand = peek(operandAddress);
 }
 {
-  bool oldC = C;
+  bool oldC = ST.C;
 
   // Set carry flag according to the right-most bit
-  C = operand & 0x01;
+ ST.C = operand & 0x01;
 
   operand = ((operand >> 1) & 0x7f) | (oldC ? 0x80 : 0x00);
   poke(operandAddress, operand);
 
-  notZ = operand;
-  N = operand & 0x80;
+  ST.notZ = operand;
+  ST.N =  operand & 0x80;
 }
 break;
 
@@ -3124,34 +3124,34 @@ case 0x6f:
 }
 {
   uInt8 oldA = A;
-  bool oldC = C;
+  bool oldC = ST.C;
 
   // Set carry flag according to the right-most bit
-  C = operand & 0x01;
+ ST.C = operand & 0x01;
 
   operand = ((operand >> 1) & 0x7f) | (oldC ? 0x80 : 0x00);
   poke(operandAddress, operand);
 
-  if(!D)
+  if(!ST.D)
   {
-    Int16 sum = (Int16)((Int8)A) + (Int16)((Int8)operand) + (C ? 1 : 0);
-    V = ((sum > 127) || (sum < -128));
+    Int16 sum = (Int16)((Int8)A) + (Int16)((Int8)operand) + (ST.C ? 1 : 0);
+   ST.V = ((sum > 127) || (sum < -128));
 
-    sum = (Int16)A + (Int16)operand + (C ? 1 : 0);
+    sum = (Int16)A + (Int16)operand + (ST.C ? 1 : 0);
     A = sum;
-    C = (sum > 0xff);
-    notZ = A;
-    N = A & 0x80;
+   ST.C = (sum > 0xff);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
   }
   else
   {
-    Int16 sum = ourBCDTable[0][A] + ourBCDTable[0][operand] + (C ? 1 : 0);
+    Int16 sum = ourBCDTable[0][A] + ourBCDTable[0][operand] + (ST.C ? 1 : 0);
 
-    C = (sum > 99);
+   ST.C = (sum > 99);
     A = ourBCDTable[1][sum & 0xff];
-    notZ = A;
-    N = A & 0x80;
-    V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
+   ST.V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
   }
 }
 break;
@@ -3165,34 +3165,34 @@ case 0x7f:
 }
 {
   uInt8 oldA = A;
-  bool oldC = C;
+  bool oldC = ST.C;
 
   // Set carry flag according to the right-most bit
-  C = operand & 0x01;
+ ST.C = operand & 0x01;
 
   operand = ((operand >> 1) & 0x7f) | (oldC ? 0x80 : 0x00);
   poke(operandAddress, operand);
 
-  if(!D)
+  if(!ST.D)
   {
-    Int16 sum = (Int16)((Int8)A) + (Int16)((Int8)operand) + (C ? 1 : 0);
-    V = ((sum > 127) || (sum < -128));
+    Int16 sum = (Int16)((Int8)A) + (Int16)((Int8)operand) + (ST.C ? 1 : 0);
+   ST.V = ((sum > 127) || (sum < -128));
 
-    sum = (Int16)A + (Int16)operand + (C ? 1 : 0);
+    sum = (Int16)A + (Int16)operand + (ST.C ? 1 : 0);
     A = sum;
-    C = (sum > 0xff);
-    notZ = A;
-    N = A & 0x80;
+   ST.C = (sum > 0xff);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
   }
   else
   {
-    Int16 sum = ourBCDTable[0][A] + ourBCDTable[0][operand] + (C ? 1 : 0);
+    Int16 sum = ourBCDTable[0][A] + ourBCDTable[0][operand] + (ST.C ? 1 : 0);
 
-    C = (sum > 99);
+   ST.C = (sum > 99);
     A = ourBCDTable[1][sum & 0xff];
-    notZ = A;
-    N = A & 0x80;
-    V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
+   ST.V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
   }
 }
 break;
@@ -3206,34 +3206,34 @@ case 0x7b:
 }
 {
   uInt8 oldA = A;
-  bool oldC = C;
+  bool oldC = ST.C;
 
   // Set carry flag according to the right-most bit
-  C = operand & 0x01;
+ ST.C = operand & 0x01;
 
   operand = ((operand >> 1) & 0x7f) | (oldC ? 0x80 : 0x00);
   poke(operandAddress, operand);
 
-  if(!D)
+  if(!ST.D)
   {
-    Int16 sum = (Int16)((Int8)A) + (Int16)((Int8)operand) + (C ? 1 : 0);
-    V = ((sum > 127) || (sum < -128));
+    Int16 sum = (Int16)((Int8)A) + (Int16)((Int8)operand) + (ST.C ? 1 : 0);
+   ST.V = ((sum > 127) || (sum < -128));
 
-    sum = (Int16)A + (Int16)operand + (C ? 1 : 0);
+    sum = (Int16)A + (Int16)operand + (ST.C ? 1 : 0);
     A = sum;
-    C = (sum > 0xff);
-    notZ = A;
-    N = A & 0x80;
+   ST.C = (sum > 0xff);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
   }
   else
   {
-    Int16 sum = ourBCDTable[0][A] + ourBCDTable[0][operand] + (C ? 1 : 0);
+    Int16 sum = ourBCDTable[0][A] + ourBCDTable[0][operand] + (ST.C ? 1 : 0);
 
-    C = (sum > 99);
+   ST.C = (sum > 99);
     A = ourBCDTable[1][sum & 0xff];
-    notZ = A;
-    N = A & 0x80;
-    V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
+   ST.V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
   }
 }
 break;
@@ -3245,34 +3245,34 @@ case 0x67:
 }
 {
   uInt8 oldA = A;
-  bool oldC = C;
+  bool oldC = ST.C;
 
   // Set carry flag according to the right-most bit
-  C = operand & 0x01;
+ ST.C = operand & 0x01;
 
   operand = ((operand >> 1) & 0x7f) | (oldC ? 0x80 : 0x00);
   poke(operandAddress, operand);
 
-  if(!D)
+  if(!ST.D)
   {
-    Int16 sum = (Int16)((Int8)A) + (Int16)((Int8)operand) + (C ? 1 : 0);
-    V = ((sum > 127) || (sum < -128));
+    Int16 sum = (Int16)((Int8)A) + (Int16)((Int8)operand) + (ST.C ? 1 : 0);
+   ST.V = ((sum > 127) || (sum < -128));
 
-    sum = (Int16)A + (Int16)operand + (C ? 1 : 0);
+    sum = (Int16)A + (Int16)operand + (ST.C ? 1 : 0);
     A = sum;
-    C = (sum > 0xff);
-    notZ = A;
-    N = A & 0x80;
+   ST.C = (sum > 0xff);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
   }
   else
   {
-    Int16 sum = ourBCDTable[0][A] + ourBCDTable[0][operand] + (C ? 1 : 0);
+    Int16 sum = ourBCDTable[0][A] + ourBCDTable[0][operand] + (ST.C ? 1 : 0);
 
-    C = (sum > 99);
+   ST.C = (sum > 99);
     A = ourBCDTable[1][sum & 0xff];
-    notZ = A;
-    N = A & 0x80;
-    V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
+   ST.V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
   }
 }
 break;
@@ -3284,34 +3284,34 @@ case 0x77:
 }
 {
   uInt8 oldA = A;
-  bool oldC = C;
+  bool oldC = ST.C;
 
   // Set carry flag according to the right-most bit
-  C = operand & 0x01;
+ ST.C = operand & 0x01;
 
   operand = ((operand >> 1) & 0x7f) | (oldC ? 0x80 : 0x00);
   poke(operandAddress, operand);
 
-  if(!D)
+  if(!ST.D)
   {
-    Int16 sum = (Int16)((Int8)A) + (Int16)((Int8)operand) + (C ? 1 : 0);
-    V = ((sum > 127) || (sum < -128));
+    Int16 sum = (Int16)((Int8)A) + (Int16)((Int8)operand) + (ST.C ? 1 : 0);
+   ST.V = ((sum > 127) || (sum < -128));
 
-    sum = (Int16)A + (Int16)operand + (C ? 1 : 0);
+    sum = (Int16)A + (Int16)operand + (ST.C ? 1 : 0);
     A = sum;
-    C = (sum > 0xff);
-    notZ = A;
-    N = A & 0x80;
+   ST.C = (sum > 0xff);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
   }
   else
   {
-    Int16 sum = ourBCDTable[0][A] + ourBCDTable[0][operand] + (C ? 1 : 0);
+    Int16 sum = ourBCDTable[0][A] + ourBCDTable[0][operand] + (ST.C ? 1 : 0);
 
-    C = (sum > 99);
+   ST.C = (sum > 99);
     A = ourBCDTable[1][sum & 0xff];
-    notZ = A;
-    N = A & 0x80;
-    V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
+   ST.V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
   }
 }
 break;
@@ -3324,34 +3324,34 @@ case 0x63:
 }
 {
   uInt8 oldA = A;
-  bool oldC = C;
+  bool oldC = ST.C;
 
   // Set carry flag according to the right-most bit
-  C = operand & 0x01;
+ ST.C = operand & 0x01;
 
   operand = ((operand >> 1) & 0x7f) | (oldC ? 0x80 : 0x00);
   poke(operandAddress, operand);
 
-  if(!D)
+  if(!ST.D)
   {
-    Int16 sum = (Int16)((Int8)A) + (Int16)((Int8)operand) + (C ? 1 : 0);
-    V = ((sum > 127) || (sum < -128));
+    Int16 sum = (Int16)((Int8)A) + (Int16)((Int8)operand) + (ST.C ? 1 : 0);
+   ST.V = ((sum > 127) || (sum < -128));
 
-    sum = (Int16)A + (Int16)operand + (C ? 1 : 0);
+    sum = (Int16)A + (Int16)operand + (ST.C ? 1 : 0);
     A = sum;
-    C = (sum > 0xff);
-    notZ = A;
-    N = A & 0x80;
+   ST.C = (sum > 0xff);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
   }
   else
   {
-    Int16 sum = ourBCDTable[0][A] + ourBCDTable[0][operand] + (C ? 1 : 0);
+    Int16 sum = ourBCDTable[0][A] + ourBCDTable[0][operand] + (ST.C ? 1 : 0);
 
-    C = (sum > 99);
+   ST.C = (sum > 99);
     A = ourBCDTable[1][sum & 0xff];
-    notZ = A;
-    N = A & 0x80;
-    V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
+   ST.V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
   }
 }
 break;
@@ -3365,34 +3365,34 @@ case 0x73:
 }
 {
   uInt8 oldA = A;
-  bool oldC = C;
+  bool oldC = ST.C;
 
   // Set carry flag according to the right-most bit
-  C = operand & 0x01;
+ ST.C = operand & 0x01;
 
   operand = ((operand >> 1) & 0x7f) | (oldC ? 0x80 : 0x00);
   poke(operandAddress, operand);
 
-  if(!D)
+  if(!ST.D)
   {
-    Int16 sum = (Int16)((Int8)A) + (Int16)((Int8)operand) + (C ? 1 : 0);
-    V = ((sum > 127) || (sum < -128));
+    Int16 sum = (Int16)((Int8)A) + (Int16)((Int8)operand) + (ST.C ? 1 : 0);
+   ST.V = ((sum > 127) || (sum < -128));
 
-    sum = (Int16)A + (Int16)operand + (C ? 1 : 0);
+    sum = (Int16)A + (Int16)operand + (ST.C ? 1 : 0);
     A = sum;
-    C = (sum > 0xff);
-    notZ = A;
-    N = A & 0x80;
+   ST.C = (sum > 0xff);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
   }
   else
   {
-    Int16 sum = ourBCDTable[0][A] + ourBCDTable[0][operand] + (C ? 1 : 0);
+    Int16 sum = ourBCDTable[0][A] + ourBCDTable[0][operand] + (ST.C ? 1 : 0);
 
-    C = (sum > 99);
+   ST.C = (sum > 99);
     A = ourBCDTable[1][sum & 0xff];
-    notZ = A;
-    N = A & 0x80;
-    V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
+   ST.V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
   }
 }
 break;
@@ -3470,32 +3470,32 @@ case 0xeb:
 {
   uInt8 oldA = A;
 
-  if(!D)
+  if(!ST.D)
   {
     operand = ~operand;
-    Int16 difference = (Int16)((Int8)A) + (Int16)((Int8)operand) + (C ? 1 : 0);
-    V = ((difference > 127) || (difference < -128));
+    Int16 difference = (Int16)((Int8)A) + (Int16)((Int8)operand) + (ST.C ? 1 : 0);
+   ST.V = ((difference > 127) || (difference < -128));
 
-    difference = ((Int16)A) + ((Int16)operand) + (C ? 1 : 0);
+    difference = ((Int16)A) + ((Int16)operand) + (ST.C ? 1 : 0);
     A = difference;
-    C = (difference > 0xff);
-    notZ = A;
-    N = A & 0x80;
+   ST.C = (difference > 0xff);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
   }
   else
   {
     Int16 difference = ourBCDTable[0][A] - ourBCDTable[0][operand] 
-        - (C ? 0 : 1);
+        - (ST.C ? 0 : 1);
 
     if(difference < 0)
       difference += 100;
 
     A = ourBCDTable[1][difference];
-    notZ = A;
-    N = A & 0x80;
+    ST.notZ = A;
+    ST.N =  A & 0x80;
 
-    C = (oldA >= (operand + (C ? 0 : 1)));
-    V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
+   ST.C = (oldA >= (operand + (ST.C ? 0 : 1)));
+   ST.V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
   }
 }
 break;
@@ -3508,32 +3508,32 @@ case 0xe5:
 {
   uInt8 oldA = A;
 
-  if(!D)
+  if(!ST.D)
   {
     operand = ~operand;
-    Int16 difference = (Int16)((Int8)A) + (Int16)((Int8)operand) + (C ? 1 : 0);
-    V = ((difference > 127) || (difference < -128));
+    Int16 difference = (Int16)((Int8)A) + (Int16)((Int8)operand) + (ST.C ? 1 : 0);
+   ST.V = ((difference > 127) || (difference < -128));
 
-    difference = ((Int16)A) + ((Int16)operand) + (C ? 1 : 0);
+    difference = ((Int16)A) + ((Int16)operand) + (ST.C ? 1 : 0);
     A = difference;
-    C = (difference > 0xff);
-    notZ = A;
-    N = A & 0x80;
+   ST.C = (difference > 0xff);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
   }
   else
   {
     Int16 difference = ourBCDTable[0][A] - ourBCDTable[0][operand] 
-        - (C ? 0 : 1);
+        - (ST.C ? 0 : 1);
 
     if(difference < 0)
       difference += 100;
 
     A = ourBCDTable[1][difference];
-    notZ = A;
-    N = A & 0x80;
+    ST.notZ = A;
+    ST.N =  A & 0x80;
 
-    C = (oldA >= (operand + (C ? 0 : 1)));
-    V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
+   ST.C = (oldA >= (operand + (ST.C ? 0 : 1)));
+   ST.V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
   }
 }
 break;
@@ -3546,32 +3546,32 @@ case 0xf5:
 {
   uInt8 oldA = A;
 
-  if(!D)
+  if(!ST.D)
   {
     operand = ~operand;
-    Int16 difference = (Int16)((Int8)A) + (Int16)((Int8)operand) + (C ? 1 : 0);
-    V = ((difference > 127) || (difference < -128));
+    Int16 difference = (Int16)((Int8)A) + (Int16)((Int8)operand) + (ST.C ? 1 : 0);
+   ST.V = ((difference > 127) || (difference < -128));
 
-    difference = ((Int16)A) + ((Int16)operand) + (C ? 1 : 0);
+    difference = ((Int16)A) + ((Int16)operand) + (ST.C ? 1 : 0);
     A = difference;
-    C = (difference > 0xff);
-    notZ = A;
-    N = A & 0x80;
+   ST.C = (difference > 0xff);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
   }
   else
   {
     Int16 difference = ourBCDTable[0][A] - ourBCDTable[0][operand] 
-        - (C ? 0 : 1);
+        - (ST.C ? 0 : 1);
 
     if(difference < 0)
       difference += 100;
 
     A = ourBCDTable[1][difference];
-    notZ = A;
-    N = A & 0x80;
+    ST.notZ = A;
+    ST.N =  A & 0x80;
 
-    C = (oldA >= (operand + (C ? 0 : 1)));
-    V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
+   ST.C = (oldA >= (operand + (ST.C ? 0 : 1)));
+   ST.V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
   }
 }
 break;
@@ -3585,32 +3585,32 @@ case 0xed:
 {
   uInt8 oldA = A;
 
-  if(!D)
+  if(!ST.D)
   {
     operand = ~operand;
-    Int16 difference = (Int16)((Int8)A) + (Int16)((Int8)operand) + (C ? 1 : 0);
-    V = ((difference > 127) || (difference < -128));
+    Int16 difference = (Int16)((Int8)A) + (Int16)((Int8)operand) + (ST.C ? 1 : 0);
+   ST.V = ((difference > 127) || (difference < -128));
 
-    difference = ((Int16)A) + ((Int16)operand) + (C ? 1 : 0);
+    difference = ((Int16)A) + ((Int16)operand) + (ST.C ? 1 : 0);
     A = difference;
-    C = (difference > 0xff);
-    notZ = A;
-    N = A & 0x80;
+   ST.C = (difference > 0xff);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
   }
   else
   {
     Int16 difference = ourBCDTable[0][A] - ourBCDTable[0][operand] 
-        - (C ? 0 : 1);
+        - (ST.C ? 0 : 1);
 
     if(difference < 0)
       difference += 100;
 
     A = ourBCDTable[1][difference];
-    notZ = A;
-    N = A & 0x80;
+    ST.notZ = A;
+    ST.N =  A & 0x80;
 
-    C = (oldA >= (operand + (C ? 0 : 1)));
-    V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
+   ST.C = (oldA >= (operand + (ST.C ? 0 : 1)));
+   ST.V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
   }
 }
 break;
@@ -3632,32 +3632,32 @@ case 0xfd:
 {
   uInt8 oldA = A;
 
-  if(!D)
+  if(!ST.D)
   {
     operand = ~operand;
-    Int16 difference = (Int16)((Int8)A) + (Int16)((Int8)operand) + (C ? 1 : 0);
-    V = ((difference > 127) || (difference < -128));
+    Int16 difference = (Int16)((Int8)A) + (Int16)((Int8)operand) + (ST.C ? 1 : 0);
+   ST.V = ((difference > 127) || (difference < -128));
 
-    difference = ((Int16)A) + ((Int16)operand) + (C ? 1 : 0);
+    difference = ((Int16)A) + ((Int16)operand) + (ST.C ? 1 : 0);
     A = difference;
-    C = (difference > 0xff);
-    notZ = A;
-    N = A & 0x80;
+   ST.C = (difference > 0xff);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
   }
   else
   {
     Int16 difference = ourBCDTable[0][A] - ourBCDTable[0][operand] 
-        - (C ? 0 : 1);
+        - (ST.C ? 0 : 1);
 
     if(difference < 0)
       difference += 100;
 
     A = ourBCDTable[1][difference];
-    notZ = A;
-    N = A & 0x80;
+    ST.notZ = A;
+    ST.N =  A & 0x80;
 
-    C = (oldA >= (operand + (C ? 0 : 1)));
-    V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
+   ST.C = (oldA >= (operand + (ST.C ? 0 : 1)));
+   ST.V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
   }
 }
 break;
@@ -3679,32 +3679,32 @@ case 0xf9:
 {
   uInt8 oldA = A;
 
-  if(!D)
+  if(!ST.D)
   {
     operand = ~operand;
-    Int16 difference = (Int16)((Int8)A) + (Int16)((Int8)operand) + (C ? 1 : 0);
-    V = ((difference > 127) || (difference < -128));
+    Int16 difference = (Int16)((Int8)A) + (Int16)((Int8)operand) + (ST.C ? 1 : 0);
+   ST.V = ((difference > 127) || (difference < -128));
 
-    difference = ((Int16)A) + ((Int16)operand) + (C ? 1 : 0);
+    difference = ((Int16)A) + ((Int16)operand) + (ST.C ? 1 : 0);
     A = difference;
-    C = (difference > 0xff);
-    notZ = A;
-    N = A & 0x80;
+   ST.C = (difference > 0xff);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
   }
   else
   {
     Int16 difference = ourBCDTable[0][A] - ourBCDTable[0][operand] 
-        - (C ? 0 : 1);
+        - (ST.C ? 0 : 1);
 
     if(difference < 0)
       difference += 100;
 
     A = ourBCDTable[1][difference];
-    notZ = A;
-    N = A & 0x80;
+    ST.notZ = A;
+    ST.N =  A & 0x80;
 
-    C = (oldA >= (operand + (C ? 0 : 1)));
-    V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
+   ST.C = (oldA >= (operand + (ST.C ? 0 : 1)));
+   ST.V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
   }
 }
 break;
@@ -3718,32 +3718,32 @@ case 0xe1:
 {
   uInt8 oldA = A;
 
-  if(!D)
+  if(!ST.D)
   {
     operand = ~operand;
-    Int16 difference = (Int16)((Int8)A) + (Int16)((Int8)operand) + (C ? 1 : 0);
-    V = ((difference > 127) || (difference < -128));
+    Int16 difference = (Int16)((Int8)A) + (Int16)((Int8)operand) + (ST.C ? 1 : 0);
+   ST.V = ((difference > 127) || (difference < -128));
 
-    difference = ((Int16)A) + ((Int16)operand) + (C ? 1 : 0);
+    difference = ((Int16)A) + ((Int16)operand) + (ST.C ? 1 : 0);
     A = difference;
-    C = (difference > 0xff);
-    notZ = A;
-    N = A & 0x80;
+   ST.C = (difference > 0xff);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
   }
   else
   {
     Int16 difference = ourBCDTable[0][A] - ourBCDTable[0][operand] 
-        - (C ? 0 : 1);
+        - (ST.C ? 0 : 1);
 
     if(difference < 0)
       difference += 100;
 
     A = ourBCDTable[1][difference];
-    notZ = A;
-    N = A & 0x80;
+    ST.notZ = A;
+    ST.N =  A & 0x80;
 
-    C = (oldA >= (operand + (C ? 0 : 1)));
-    V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
+   ST.C = (oldA >= (operand + (ST.C ? 0 : 1)));
+   ST.V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
   }
 }
 break;
@@ -3764,32 +3764,32 @@ case 0xf1:
 {
   uInt8 oldA = A;
 
-  if(!D)
+  if(!ST.D)
   {
     operand = ~operand;
-    Int16 difference = (Int16)((Int8)A) + (Int16)((Int8)operand) + (C ? 1 : 0);
-    V = ((difference > 127) || (difference < -128));
+    Int16 difference = (Int16)((Int8)A) + (Int16)((Int8)operand) + (ST.C ? 1 : 0);
+   ST.V = ((difference > 127) || (difference < -128));
 
-    difference = ((Int16)A) + ((Int16)operand) + (C ? 1 : 0);
+    difference = ((Int16)A) + ((Int16)operand) + (ST.C ? 1 : 0);
     A = difference;
-    C = (difference > 0xff);
-    notZ = A;
-    N = A & 0x80;
+   ST.C = (difference > 0xff);
+    ST.notZ = A;
+    ST.N =  A & 0x80;
   }
   else
   {
     Int16 difference = ourBCDTable[0][A] - ourBCDTable[0][operand] 
-        - (C ? 0 : 1);
+        - (ST.C ? 0 : 1);
 
     if(difference < 0)
       difference += 100;
 
     A = ourBCDTable[1][difference];
-    notZ = A;
-    N = A & 0x80;
+    ST.notZ = A;
+    ST.N =  A & 0x80;
 
-    C = (oldA >= (operand + (C ? 0 : 1)));
-    V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
+   ST.C = (oldA >= (operand + (ST.C ? 0 : 1)));
+   ST.V = ((oldA ^ A) & 0x80) && ((A ^ operand) & 0x80);
   }
 }
 break;
@@ -3804,9 +3804,9 @@ case 0xcb:
   uInt16 value = (uInt16)(X & A) - (uInt16)operand;
   X = (value & 0xff);
 
-  notZ = X;
-  N = X & 0x80;
-  C = !(value & 0x0100);
+  ST.notZ = X;
+  ST.N =  X & 0x80;
+ ST.C = !(value & 0x0100);
 }
 break;
 
@@ -3815,7 +3815,7 @@ case 0x38:
 {
 }
 {
-  C = true;
+ ST.C = true;
 }
 break;
 
@@ -3824,7 +3824,7 @@ case 0xf8:
 {
 }
 {
-  D = true;
+  ST.D = true;
 }
 break;
 
@@ -3833,7 +3833,7 @@ case 0x78:
 {
 }
 {
-  I = true;
+  ST.I = true;
 }
 break;
 
@@ -3916,14 +3916,14 @@ case 0x0f:
 }
 {
   // Set carry flag according to the left-most bit in value
-  C = operand & 0x80;
+ ST.C = operand & 0x80;
 
   operand <<= 1;
   poke(operandAddress, operand);
 
   A |= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -3936,14 +3936,14 @@ case 0x1f:
 }
 {
   // Set carry flag according to the left-most bit in value
-  C = operand & 0x80;
+ ST.C = operand & 0x80;
 
   operand <<= 1;
   poke(operandAddress, operand);
 
   A |= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -3956,14 +3956,14 @@ case 0x1b:
 }
 {
   // Set carry flag according to the left-most bit in value
-  C = operand & 0x80;
+ ST.C = operand & 0x80;
 
   operand <<= 1;
   poke(operandAddress, operand);
 
   A |= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -3974,14 +3974,14 @@ case 0x07:
 }
 {
   // Set carry flag according to the left-most bit in value
-  C = operand & 0x80;
+ ST.C = operand & 0x80;
 
   operand <<= 1;
   poke(operandAddress, operand);
 
   A |= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -3992,14 +3992,14 @@ case 0x17:
 }
 {
   // Set carry flag according to the left-most bit in value
-  C = operand & 0x80;
+ ST.C = operand & 0x80;
 
   operand <<= 1;
   poke(operandAddress, operand);
 
   A |= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -4011,14 +4011,14 @@ case 0x03:
 }
 {
   // Set carry flag according to the left-most bit in value
-  C = operand & 0x80;
+ ST.C = operand & 0x80;
 
   operand <<= 1;
   poke(operandAddress, operand);
 
   A |= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -4031,14 +4031,14 @@ case 0x13:
 }
 {
   // Set carry flag according to the left-most bit in value
-  C = operand & 0x80;
+ ST.C = operand & 0x80;
 
   operand <<= 1;
   poke(operandAddress, operand);
 
   A |= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -4051,14 +4051,14 @@ case 0x4f:
 }
 {
   // Set carry flag according to the right-most bit in value
-  C = operand & 0x01;
+ ST.C = operand & 0x01;
 
   operand = (operand >> 1) & 0x7f;
   poke(operandAddress, operand);
 
   A ^= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -4071,14 +4071,14 @@ case 0x5f:
 }
 {
   // Set carry flag according to the right-most bit in value
-  C = operand & 0x01;
+ ST.C = operand & 0x01;
 
   operand = (operand >> 1) & 0x7f;
   poke(operandAddress, operand);
 
   A ^= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -4091,14 +4091,14 @@ case 0x5b:
 }
 {
   // Set carry flag according to the right-most bit in value
-  C = operand & 0x01;
+ ST.C = operand & 0x01;
 
   operand = (operand >> 1) & 0x7f;
   poke(operandAddress, operand);
 
   A ^= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -4109,14 +4109,14 @@ case 0x47:
 }
 {
   // Set carry flag according to the right-most bit in value
-  C = operand & 0x01;
+ ST.C = operand & 0x01;
 
   operand = (operand >> 1) & 0x7f;
   poke(operandAddress, operand);
 
   A ^= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -4127,14 +4127,14 @@ case 0x57:
 }
 {
   // Set carry flag according to the right-most bit in value
-  C = operand & 0x01;
+ ST.C = operand & 0x01;
 
   operand = (operand >> 1) & 0x7f;
   poke(operandAddress, operand);
 
   A ^= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -4146,14 +4146,14 @@ case 0x43:
 }
 {
   // Set carry flag according to the right-most bit in value
-  C = operand & 0x01;
+ ST.C = operand & 0x01;
 
   operand = (operand >> 1) & 0x7f;
   poke(operandAddress, operand);
 
   A ^= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -4166,14 +4166,14 @@ case 0x53:
 }
 {
   // Set carry flag according to the right-most bit in value
-  C = operand & 0x01;
+ ST.C = operand & 0x01;
 
   operand = (operand >> 1) & 0x7f;
   poke(operandAddress, operand);
 
   A ^= operand;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -4313,8 +4313,8 @@ case 0xaa:
 }
 {
   X = A;
-  notZ = X;
-  N = X & 0x80;
+  ST.notZ = X;
+  ST.N =  X & 0x80;
 }
 break;
 
@@ -4324,8 +4324,8 @@ case 0xa8:
 }
 {
   Y = A;
-  notZ = Y;
-  N = Y & 0x80;
+  ST.notZ = Y;
+  ST.N =  Y & 0x80;
 }
 break;
 
@@ -4335,8 +4335,8 @@ case 0xba:
 }
 {
   X = SP;
-  notZ = X;
-  N = X & 0x80;
+  ST.notZ = X;
+  ST.N =  X & 0x80;
 }
 break;
 
@@ -4346,8 +4346,8 @@ case 0x8a:
 }
 {
   A = X;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 
@@ -4366,8 +4366,8 @@ case 0x98:
 }
 {
   A = Y;
-  notZ = A;
-  N = A & 0x80;
+  ST.notZ = A;
+  ST.N =  A & 0x80;
 }
 break;
 

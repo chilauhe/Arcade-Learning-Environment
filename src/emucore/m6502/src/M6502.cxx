@@ -75,19 +75,19 @@ void M6502::install(System& system)
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void M6502::reset()
 {
-  // Clear the execution status flags
-  myExecutionStatus = 0;
+	// Clear the execution status flags
+	myExecutionStatus = 0;
 
-  // Set registers to default values
-  A = X = Y = 0;
-  SP = 0xff;
-  PS(0x20);
+	// Set registers to default values
+	A = X = Y = 0;
+	SP = 0xff;
+	PS(0x20);
 
-  // Reset access flag
-  myLastAccessWasRead = true;
+	// Reset access flag
+	myLastAccessWasRead = true;
 
-  // Load PC from the reset vector
-  PC = (uInt16)mySystem->peek(0xfffc) | ((uInt16)mySystem->peek(0xfffd) << 8);
+	// Load PC from the reset vector
+	PC = (uInt16)mySystem->peek(0xfffc) | ((uInt16)mySystem->peek(0xfffd) << 8);
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -119,19 +119,19 @@ uInt8 M6502::PS() const
 {
   uInt8 ps = 0x20;
 
-  if(N) 
+  if(ST.N) 
     ps |= 0x80;
-  if(V) 
+  if(ST.V) 
     ps |= 0x40;
-  if(B) 
+  if(ST.B) 
     ps |= 0x10;
-  if(D) 
+  if(ST.D) 
     ps |= 0x08;
-  if(I) 
+  if(ST.I) 
     ps |= 0x04;
-  if(!notZ) 
+  if(!ST.notZ) 
     ps |= 0x02;
-  if(C) 
+  if(ST.C) 
     ps |= 0x01;
 
   return ps;
@@ -140,13 +140,13 @@ uInt8 M6502::PS() const
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void M6502::PS(uInt8 ps)
 {
-  N = ps & 0x80;
-  V = ps & 0x40;
-  B = true;        // B = ps & 0x10;  The 6507's B flag always true
-  D = ps & 0x08;
-  I = ps & 0x04;
-  notZ = !(ps & 0x02);
-  C = ps & 0x01;
+	ST.N = ps & 0x80;
+	ST.V = ps & 0x40;
+	ST.B = true;        // B = ps & 0x10;  The 6507's B flag always true
+	ST.D = ps & 0x08;
+	ST.I = ps & 0x04;
+	ST.notZ = !(ps & 0x02);
+	ST.C = ps & 0x01;
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

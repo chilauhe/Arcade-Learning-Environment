@@ -78,7 +78,10 @@ class Serializer
 
       @param b The boolean value to write to the output stream.
     */
-    void putBool(bool b);
+    inline void putBool(bool b)
+	{
+		putInt(b ? TruePattern : FalsePattern);
+	}
 
     // Accessor for myStream
     // TODO: don't copy the whole streams. 

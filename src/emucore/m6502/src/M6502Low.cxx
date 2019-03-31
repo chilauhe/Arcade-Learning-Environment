@@ -192,14 +192,14 @@ bool M6502Low::execute(uInt32 number)
 void M6502Low::interruptHandler()
 {
   // Handle the interrupt
-  if((myExecutionStatus & MaskableInterruptBit) && !I)
+  if((myExecutionStatus & MaskableInterruptBit) && !ST.I)
   {
     mySystem->incrementCycles(7 * mySystemCyclesPerProcessorCycle);
     mySystem->poke(0x0100 + SP--, (PC - 1) >> 8);
     mySystem->poke(0x0100 + SP--, (PC - 1) & 0x00ff);
     mySystem->poke(0x0100 + SP--, PS() & (~0x10));
-    D = false;
-    I = true;
+    ST.D = false;
+    ST.I = true;
     PC = (uInt16)mySystem->peek(0xFFFE) | ((uInt16)mySystem->peek(0xFFFF) << 8);
   }
   else if(myExecutionStatus & NonmaskableInterruptBit)
@@ -208,7 +208,7 @@ void M6502Low::interruptHandler()
     mySystem->poke(0x0100 + SP--, (PC - 1) >> 8);
     mySystem->poke(0x0100 + SP--, (PC - 1) & 0x00ff);
     mySystem->poke(0x0100 + SP--, PS() & (~0x10));
-    D = false;
+    ST.D = false;
     PC = (uInt16)mySystem->peek(0xFFFA) | ((uInt16)mySystem->peek(0xFFFB) << 8);
   }
 
@@ -232,13 +232,13 @@ bool M6502Low::save(Serializer& out)
     out.putInt(IR);   // Instruction register
     out.putInt(PC);   // Program Counter
 
-    out.putBool(N);     // N flag for processor status register
-    out.putBool(V);     // V flag for processor status register
-    out.putBool(B);     // B flag for processor status register
-    out.putBool(D);     // D flag for processor status register
-    out.putBool(I);     // I flag for processor status register
-    out.putBool(notZ);  // Z flag complement for processor status register
-    out.putBool(C);     // C flag for processor status register
+    out.putBool(ST.N);     // N flag for processor status register
+    out.putBool(ST.V);     // V flag for processor status register
+    out.putBool(ST.B);     // B flag for processor status register
+    out.putBool(ST.D);     // D flag for processor status register
+    out.putBool(ST.I);     // I flag for processor status register
+    out.putBool(ST.notZ);  // Z flag complement for processor status register
+    out.putBool(ST.C);     // C flag for processor status register
 
     out.putInt(myExecutionStatus);
   }
@@ -272,13 +272,13 @@ bool M6502Low::load(Deserializer& in)
     IR = (uInt8) in.getInt();   // Instruction register
     PC = (uInt16) in.getInt();  // Program Counter
 
-    N = in.getBool();     // N flag for processor status register
-    V = in.getBool();     // V flag for processor status register
-    B = in.getBool();     // B flag for processor status register
-    D = in.getBool();     // D flag for processor status register
-    I = in.getBool();     // I flag for processor status register
-    notZ = in.getBool();  // Z flag complement for processor status register
-    C = in.getBool();     // C flag for processor status register
+    ST.N = in.getBool();     // N flag for processor status register
+    ST.V = in.getBool();     // V flag for processor status register
+    ST.B = in.getBool();     // B flag for processor status register
+    ST.D = in.getBool();     // D flag for processor status register
+    ST.I = in.getBool();     // I flag for processor status register
+    ST.notZ = in.getBool();  // Z flag complement for processor status register
+    ST.C = in.getBool();     // C flag for processor status register
 
     myExecutionStatus = (uInt8) in.getInt();
   }

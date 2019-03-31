@@ -709,6 +709,7 @@ void Settings::setDefaultSettings() {
     intSettings.insert(pair<string, int>("frame_skip", 1));
     floatSettings.insert(pair<string, float>("repeat_action_probability", 0.25));
     stringSettings.insert(pair<string, string>("rom_file", ""));
+	stringSettings.insert(pair<string, string>("rom_name", ""));
 
     // Record settings
     intSettings.insert(pair<string, int>("fragsize", 64)); // fragsize to 64 ensures proper sound sync

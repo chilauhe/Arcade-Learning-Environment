@@ -160,7 +160,7 @@ reward_t StellaEnvironment::act(Action player_a_action, Action player_b_action) 
 
     // If so desired, request one frame's worth of sound (this does nothing if recording
     // is not enabled)
-    m_osystem->sound().recordNextFrame();
+    //m_osystem->sound().recordNextFrame();
 
     // Similarly record screen as needed
     if (m_screen_exporter.get() != NULL)
@@ -283,7 +283,8 @@ void StellaEnvironment::processScreen() {
 
 void StellaEnvironment::processRAM() {
   // Copy RAM over
-  for (int i = 0; i < m_ram.size(); i++)
+  const uint16_t size = m_ram.size();
+  for (uint16_t i = 0; i < size; i++)
     *m_ram.byte(i) = m_osystem->console().system().peek(i + 0x80); 
 }
 

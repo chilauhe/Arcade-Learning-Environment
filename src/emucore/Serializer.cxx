@@ -40,14 +40,21 @@ void Serializer::close(void)
 }
 
 
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void Serializer::putInt(int value)
 {
-    unsigned char buf[4];
-    for(int i = 0; i < 4; ++i)
-        buf[i] = (value >> (i<<3)) & 0xff;
-    
-    myStream.write((char*)buf, 4);
+    //unsigned char buf[4];
+    //for(int i = 0; i < 4; ++i)
+    //    buf[i] = (value >> (i<<3)) & 0xff;
+    //todo: only little endian system needs convert
+#ifdef WIN32
+	value= _byteswap_ulong(value);
+#else
+#include <byteswap.h>
+	value = __bswap_32(value);
+#endif
+    myStream.write((char*)value, 4);
     if(myStream.bad())
         throw "Serializer: file write failed";
 }
@@ -64,8 +71,6 @@ void Serializer::putString(const string& str)
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-void Serializer::putBool(bool b)
-{
-    putInt(b ? TruePattern: FalsePattern);
-}
+//void Serializer::putBool(bool b)
+
 

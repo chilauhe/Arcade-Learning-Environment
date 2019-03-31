@@ -232,15 +232,15 @@ class M6502
     uInt8 SP;   // Stack Pointer
     uInt8 IR;   // Instruction register
     uInt16 PC;  // Program Counter
-
-    bool N;     // N flag for processor status register
-    bool V;     // V flag for processor status register
-    bool B;     // B flag for processor status register
-    bool D;     // D flag for processor status register
-    bool I;     // I flag for processor status register
-    bool notZ;  // Z flag complement for processor status register
-    bool C;     // C flag for processor status register
-
+	struct {
+		bool N;     // N flag for processor status register
+		bool V;     // V flag for processor status register
+		bool B;     // B flag for processor status register
+		bool D;     // D flag for processor status register
+		bool I;     // I flag for processor status register
+		bool notZ;  // Z flag complement for processor status register
+		bool C;     // C flag for processor status register
+	} ST;
 #ifdef DEBUGGER_SUPPORT
     /// Pointer to the debugger for this processor or the null pointer
     Debugger* myDebugger;

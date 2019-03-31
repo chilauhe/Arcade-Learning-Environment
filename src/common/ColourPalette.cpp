@@ -30,11 +30,11 @@ inline uInt32 packRGB(uInt8 r, uInt8 g, uInt8 b)
 
 inline uInt32 convertGrayscale(uInt32 packedRGBValue)
 {
-    double r = (packedRGBValue >> 16) & 0xff;
-    double g = (packedRGBValue >> 8)  & 0xff;
-    double b = (packedRGBValue >> 0)  & 0xff;
+	uInt32 r = (packedRGBValue >> 16) & 0xff;
+	uInt32 g = (packedRGBValue >> 8)  & 0xff;
+	uInt32 b = (packedRGBValue >> 0)  & 0xff;
 
-    uInt8 lum = (uInt8) round(r * 0.2989 + g * 0.5870 + b * 0.1140);
+    uInt8 lum = (uInt8) ((r * 299 + g * 587 + b * 114)/1000);
 
     return packRGB(lum, lum, lum);
 }
@@ -91,10 +91,10 @@ void ColourPalette::applyPaletteRGB(std::vector<unsigned char>& dst_buffer, uInt
 
     uInt8 *p = src_buffer;
 #pragma omp parallel for
-    for(int i = 0; i < dst_size; i += 3){
-        dst_buffer[i+0] = (unsigned char) ((m_palette[p[i/3]] >> 16));    // r
-        dst_buffer[i+1] = (unsigned char) ((m_palette[p[i/3]] >>  8));    // g
-        dst_buffer[i+2] = (unsigned char) ((m_palette[p[i/3]] >>  0));    // b
+    for(int i = 0; i < src_size; i++){
+        dst_buffer[i*3+0] = (unsigned char) ((m_palette[p[i]] >> 16));    // r
+        dst_buffer[i*3+1] = (unsigned char) ((m_palette[p[i]] >>  8));    // g
+        dst_buffer[i*3+2] = (unsigned char) ((m_palette[p[i]] >>  0));    // b
     }
 }
 
